@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Smart search - aml-backend</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Smart search";
+    var mkdocs_page_input_path = "features/smart_search.md";
+    var mkdocs_page_url = "/features/smart_search/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> aml-backend</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../ascii-entities/">Ascii entities</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../debugging/">Debugging</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../developer/">Developer</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../domain_knowledge/">Domain knowledge</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../jenkins/">Jenkins</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../requirements/">Requirements</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Features</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../elasticsearch_upgrade_2.x_6.x/">Elasticsearch upgrade 2.x 6.x</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../notification/">Notification</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../recommender_2017/">Recommender 2017</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../shared_folders_2018/">Shared folders 2018</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Smart search</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#business-objective">Business Objective</a></li>
+    
+
+    <li class="toctree-l3"><a href="#researched-solutions">Researched Solutions</a></li>
+    
+
+    <li class="toctree-l3"><a href="#current-search">Current Search</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#current-ablities">Current Ablities:</a></li>
+        
+            <li><a class="toctree-l4" href="#current-implementation">Current Implementation:</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#nextgen-search">NextGen Search</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#nextgen-ablities">NextGen Ablities:</a></li>
+        
+            <li><a class="toctree-l4" href="#nextgen-requirements">NextGen Requirements:</a></li>
+        
+            <li><a class="toctree-l4" href="#restrictionsrequirements">Restrictions/Requirements</a></li>
+        
+            <li><a class="toctree-l4" href="#proposed-storiestasks">Proposed Stories/Tasks</a></li>
+        
+            <li><a class="toctree-l4" href="#strategies">Strategies</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#learning-resources">Learning Resources</a></li>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../wiki/">Wiki</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">aml-backend</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Features &raquo;</li>
+        
+      
+    
+    <li>Smart search</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="business-objective">Business Objective</h2>
+<p>(From Ticket https://github.com/aml-development/aml-backend/issues/192)</p>
+<p>Ability to do better search
+<img alt="" src="https://raw.githubusercontent.com/aml-development/aml-documentation/master/mockups/marketplace/Center_smartsearch_recommendation.PNG" /></p>
+<p>Requirement came from https://github.com/aml-development/aml-documentation/wiki/Iteration-53#uiux</p>
+<h2 id="researched-solutions">Researched Solutions</h2>
+<p>We researched 3 possible solutions before deciding on Elasticsearch:    </p>
+<p><strong>Solution 1: Using Postgres</strong>  <br />
+http://www.postgresonline.com/journal/archives/169-Fuzzy-string-matching-with-Trigram-and-Trigraphs.html
+https://github.com/jleivaizq/djorm-ext-pgtrgm</p>
+<p><strong>Solution 2: Using Elasticsearch</strong>  <br />
+<a href="https://www.elastic.co/webinars/get-started-with-elasticsearch?elektra=home&amp;storm=banner&amp;iesrc=ctr">Elasticsearch</a>
+https://qbox.io/blog/how-to-elasticsearch-python-django-part1</p>
+<p>Steps:
+<em> Add data to the elasticsearch index in bulk.
+</em> Add some frontend and write some queries.
+* Make the index updatable when new data is added, updated or deleted.</p>
+<p><strong>Solution 3: Using Whoosh (Python Indexing) Custom REST implementation</strong>  <br />
+<a href="https://whoosh.readthedocs.io/en/latest/index.html">whoosh</a></p>
+<h2 id="current-search">Current Search</h2>
+<h3 id="current-ablities">Current Ablities:</h3>
+<ul>
+<li>Auto complete</li>
+<li>Using https://twitter.github.io/typeahead.js/ and in the metadata endpoint send a array of all the apps the user can see</li>
+<li>SQL LIKE</li>
+</ul>
+<h3 id="current-implementation">Current Implementation:</h3>
+<ul>
+<li>Search_fields: title, description, description_short, tags__name</li>
+<li>Filtered by category, agency, listing_types</li>
+<li>Search is currently using Postgres to get search results (list of listings) from database.</li>
+<li>For every call, it loops through every listing to make sure the user has access to listing using the security marking, the results of the call to see if user has access is cached.</li>
+<li><code>system_has_access_control(username, i.security_marking):</code> in aml/amlcenter/models.py/AccessControlListingManager/for_user</li>
+<li>It currently takes 0.8-2.5 Seconds to get results with warm Redis cache using dummy data.</li>
+</ul>
+<p>Example Calls:</p>
+<pre><code>/api/listings/search/?search=Air+Mail&amp;offset=0&amp;limit=24
+/api/listings/search/?search=Air+Mai&amp;offset=0&amp;limit=24&amp;type=web+application&amp;type=widget&amp;agency=Minitrue
+</code></pre>
+
+<p>Code of Interest:</p>
+<pre><code class="python">router.register(r'listings/search', views.ListingSearchViewSet, base_name='listingssearch')
+</code></pre>
+
+<h2 id="nextgen-search">NextGen Search</h2>
+<h3 id="nextgen-ablities">NextGen Ablities:</h3>
+<ul>
+<li>Multifield search</li>
+<li>https://www.elastic.co/guide/en/elasticsearch/guide/current/multi-field-search.html</li>
+<li>Fuzzy matching</li>
+<li>Auto complete</li>
+<li>https://www.elastic.co/guide/en/elasticsearch/guide/current/_index_time_search_as_you_type.html</li>
+<li>Relevance search (accuracy of results)</li>
+<li>http://opensourceconnections.com/blog/2014/06/10/what-is-search-relevancy/</li>
+<li>https://www.elastic.co/guide/en/elasticsearch/guide/current/controlling-relevance.html</li>
+<li>Performance</li>
+</ul>
+<h3 id="nextgen-requirements">NextGen Requirements:</h3>
+<ul>
+<li>Users shall be able to search for listings' title, description, description_short, and tags and filter by category, agency, and listing types for the listings they are authorized to see</li>
+<li>Users shall be able to search listings that they are authorized to see while user types in keyboard (autocomplete)</li>
+<li>Users shall be able to search for misspelled similar listings that they are authorized to see (fuzzy matching)</li>
+<li>Example:  When user types 'Armail' the result coming back shall contain 'Airmail'</li>
+</ul>
+<h3 id="restrictionsrequirements">Restrictions/Requirements</h3>
+<ul>
+<li>Access Results can only be cached 24 hours</li>
+<li>Search Storage must have authentication security</li>
+<li>Shall not include delete apps or disabled apps</li>
+</ul>
+<h3 id="proposed-storiestasks">Proposed Stories/Tasks</h3>
+<p><strong>Story:</strong>  <br />
+As a member of the Apps Mall Team, I want to understand the requirements for the new search feature so that I can contribute to the project    </p>
+<p><strong>Acceptance Criteria:</strong>
+Team member will review and comprehend wiki page documention - https://github.com/aml-development/aml-documentation/wiki/Smart-Search-(2017)
+For each task, individual puts a thumbs up once completed</p>
+<p><strong>Tasks:</strong>  <br />
+<em> Knowlege Task - Each Team Member shall have understanding on what Elasticsearch is used for, the purpose it serves, and the application that appmall will be using it for, and understand the following Elasticsearch concepts:
+ * Mapping
+ * Indexes
+ * Search API
+ * Query API
+ * Document API
+ * Document Format
+ * Nested Objects vs Arrays
+     * https://www.elastic.co/guide/en/elasticsearch/guide/current/nested-objects.html
+</em> Knowledge Task - Each Team Member shall have understanding on how Elasticsearch API works with Python
+<em> Knowlege Task - Each Team Member shall understand data modeling
+ * https://www.elastic.co/guide/en/elasticsearch/guide/current/modeling-your-data.html
+</em> Knowlege Task - Each Team Member shall read 4 parts of the 'elasticsearch-python-django-series' from qbox
+ * https://qbox.io/blog/series/elasticsearch-python-django-series
+ * https://qbox.io/blog/elasticsearch-and-django-bulk-index</p>
+<p><strong>Story:</strong>  <br />
+As a user I want to be able to retrieve search results faster than the current bench marks.     </p>
+<p><strong>Acceptance Criteria:</strong>
+Team member will review and comprehend wiki page documention - https://github.com/aml-development/aml-documentation/wiki/Smart-Search-(2017)
+For each task, individual puts a thumbs up once completed</p>
+<p><strong>Tasks:</strong>  <br />
+<em> Coding Task - Team Member shall prepare code to increase the performance of checking listing authorization<br />
+</em> Coding Task - Team Member shall update the backend to not return the full listing information when searching (maybe)
+* Coding Task - Team member shall ensure that access results shall only be cached for 24 hours</p>
+<p><strong>Story:</strong>  <br />
+As a user I want to see results ordered by relevance so that I can find the app I am looking for faster and easier.</p>
+<p><strong>Acceptance Criteria:</strong>
+Team member will review and comprehend wiki page documention - https://github.com/aml-development/aml-documentation/wiki/Smart-Search-(2017)
+For each task, individual puts a thumbs up once completed</p>
+<p><strong>Tasks:</strong>
+<em> Devops Task - Team Member shall install elastic search library
+</em> Coding task - Team member shall ensure that elastic search has authentication security
+<em> Coding Task - Team member shall ensure that deleted apps and disabled apps are not included in results (possibly not included in elastic search?)
+</em> Coding Task - Team member shall update backend to use elastic search library for type-ahead and regular search
+* Knowledge Task - Team member shall verify that the front-end does not need to be updated</p>
+<p><strong>Story:</strong>  <br />
+As a user I want to be able to see listings that are similar to what I searched for so that if I misspell a word I will still be able to easily find the application I was looking for</p>
+<p><strong>Acceptance Criteria:</strong>
+Team member will review and comprehend wiki page documention - https://github.com/aml-development/aml-documentation/wiki/Smart-Search-(2017)
+For each task, individual puts a thumbs up once completed</p>
+<p><strong>Tasks:</strong>
+<em> Coding Task - Team member shall update backend to provide fuzzy matching results
+</em> Coding Task - Team member shall update the frontend to suggest alternate search terms (maybe)</p>
+<h3 id="strategies">Strategies</h3>
+<ul>
+<li>Figure out a way that it will not have to ' loops through every listing to make sure the user has access'</li>
+<li>Do a distinct for all listings' security markings, get a list of it, loop though list to check for user's access, save that in redis,  when searching do a inclusion of listings that have the security markings user's can access</li>
+</ul>
+<h2 id="learning-resources">Learning Resources</h2>
+<ul>
+<li>https://qbox.io/blog/series/elasticsearch-python-django-series</li>
+<li>https://qbox.io/blog/elasticsearch-and-django-bulk-index</li>
+<li>https://www.elastic.co/guide/en/elasticsearch/guide/current/complex-core-fields.html</li>
+</ul>
+<p><strong>Relevant Code</strong>
+<em> When a change/delete happens to a listing the hooks in models.py can be use to update the documents.
+</em> Does Search response really need every field in the Serializer in the database</p>
+<p><strong>aml-center search relevant code</strong>
+https://github.com/aml-development/aml-center/blob/master/app/js/webapi/Listing.js
+https://github.com/aml-development/aml-center/blob/master/app/js/components/discovery/index.jsx</p>
+<p><strong>models.py</strong></p>
+<pre><code class="python">@receiver(post_save, sender=Listing)
+def post_save_listing(sender, instance, created, **kwargs):
+    cache.delete_pattern(&quot;storefront-*&quot;)
+    cache.delete_pattern(&quot;library_self-*&quot;)
+
+@receiver(post_delete, sender=Listing)
+def post_delete_listing(sender, instance, **kwargs):
+    cache.delete_pattern(&quot;storefront-*&quot;)
+    cache.delete_pattern(&quot;library_self-*&quot;)
+</code></pre>
+
+<p><strong>OR</strong>
+overriding the save and delete function of the model</p>
+<p><strong>Request/Response For Search Results</strong></p>
+<pre><code class="JSON">GET /api/listings/search/?search=Air+Mail&amp;amp;offset=0&amp;amp;limit=24 HTTP/1.1
+Authorization: Basic YmlnYnJvdGhlcjpwYXNzd29yZA==  &lt;&lt; BigBrother
+Content-Type: application/json
+</code></pre>
+
+<p>Response:</p>
+<pre><code class="JSON">{
+  &quot;count&quot;: 30,
+  &quot;next&quot;: &quot;http://127.0.0.1:8001/api/listings/search/?limit=24&amp;offset=24&amp;search=Air+Mail&quot;,
+  &quot;previous&quot;: null,
+  &quot;results&quot;: [
+    {
+      &quot;id&quot;: 1,
+      &quot;is_bookmarked&quot;: true,
+      &quot;screenshots&quot;: [
+        {
+          &quot;small_image&quot;: {
+            &quot;url&quot;: &quot;http://127.0.0.1:8001/api/image/10/&quot;,
+            &quot;id&quot;: 10,
+            &quot;security_marking&quot;: &quot;UNCLASSIFIED&quot;
+          },
+          &quot;large_image&quot;: {
+            &quot;url&quot;: &quot;http://127.0.0.1:8001/api/image/11/&quot;,
+            &quot;id&quot;: 11,
+            &quot;security_marking&quot;: &quot;UNCLASSIFIED&quot;
+          }
+        }
+      ],
+      &quot;doc_urls&quot;: [
+        {
+          &quot;name&quot;: &quot;wiki&quot;,
+          &quot;url&quot;: &quot;http://www.google.com/wiki&quot;
+        },
+        {
+          &quot;name&quot;: &quot;guide&quot;,
+          &quot;url&quot;: &quot;http://www.google.com/guide&quot;
+        }
+      ],
+      &quot;owners&quot;: [
+        {
+          &quot;id&quot;: 4,
+          &quot;user&quot;: {
+            &quot;username&quot;: &quot;wsmith&quot;
+          },
+          &quot;display_name&quot;: &quot;Winston Smith&quot;
+        }
+      ],
+      &quot;categories&quot;: [
+        {
+          &quot;title&quot;: &quot;Communication&quot;,
+          &quot;description&quot;: &quot;Moving info between people and things&quot;
+        },
+        {
+          &quot;title&quot;: &quot;Productivity&quot;,
+          &quot;description&quot;: &quot;Do more in less time&quot;
+        }
+      ],
+      &quot;tags&quot;: [
+        {
+          &quot;name&quot;: &quot;demo&quot;
+        },
+        {
+          &quot;name&quot;: &quot;example&quot;
+        },
+        {
+          &quot;name&quot;: &quot;tag_0&quot;
+        }
+      ],
+      &quot;contacts&quot;: [
+        {
+          &quot;id&quot;: 1,
+          &quot;contact_type&quot;: {
+            &quot;name&quot;: &quot;Civillian&quot;
+          },
+          &quot;secure_phone&quot;: null,
+          &quot;unsecure_phone&quot;: &quot;321-123-7894&quot;,
+          &quot;email&quot;: &quot;osha@stark.com&quot;,
+          &quot;name&quot;: &quot;Osha&quot;,
+          &quot;organization&quot;: &quot;House Stark&quot;
+        },
+        {
+          &quot;id&quot;: 3,
+          &quot;contact_type&quot;: {
+            &quot;name&quot;: &quot;Military&quot;
+          },
+          &quot;secure_phone&quot;: null,
+          &quot;unsecure_phone&quot;: &quot;222-324-3846&quot;,
+          &quot;email&quot;: &quot;brienne@stark.com&quot;,
+          &quot;name&quot;: &quot;Brienne Tarth&quot;,
+          &quot;organization&quot;: &quot;House Stark&quot;
+        }
+      ],
+      &quot;intents&quot;: [],
+      &quot;small_icon&quot;: {
+        &quot;url&quot;: &quot;http://127.0.0.1:8001/api/image/6/&quot;,
+        &quot;id&quot;: 6,
+        &quot;security_marking&quot;: &quot;UNCLASSIFIED&quot;
+      },
+      &quot;large_icon&quot;: {
+        &quot;url&quot;: &quot;http://127.0.0.1:8001/api/image/7/&quot;,
+        &quot;id&quot;: 7,
+        &quot;security_marking&quot;: &quot;UNCLASSIFIED&quot;
+      },
+      &quot;banner_icon&quot;: {
+        &quot;url&quot;: &quot;http://127.0.0.1:8001/api/image/8/&quot;,
+        &quot;id&quot;: 8,
+        &quot;security_marking&quot;: &quot;UNCLASSIFIED&quot;
+      },
+      &quot;large_banner_icon&quot;: {
+        &quot;url&quot;: &quot;http://127.0.0.1:8001/api/image/9/&quot;,
+        &quot;id&quot;: 9,
+        &quot;security_marking&quot;: &quot;UNCLASSIFIED&quot;
+      },
+      &quot;agency&quot;: {
+        &quot;title&quot;: &quot;Ministry of Truth&quot;,
+        &quot;short_name&quot;: &quot;Minitrue&quot;
+      },
+      &quot;last_activity&quot;: {
+        &quot;action&quot;: &quot;APPROVED&quot;,
+        &quot;activity_date&quot;: &quot;2016-08-26T16:49:28.106798Z&quot;,
+        &quot;description&quot;: null,
+        &quot;author&quot;: {
+          &quot;id&quot;: 4,
+          &quot;user&quot;: {
+            &quot;username&quot;: &quot;wsmith&quot;,
+            &quot;email&quot;: &quot;wsmith@oceania.gov&quot;
+          },
+          &quot;display_name&quot;: &quot;Winston Smith&quot;,
+          &quot;dn&quot;: &quot;Winston Smith wsmith&quot;
+        },
+        &quot;listing&quot;: {
+          &quot;unique_name&quot;: &quot;aml.test.air_mail&quot;,
+          &quot;title&quot;: &quot;Air Mail&quot;,
+          &quot;id&quot;: 1,
+          &quot;agency&quot;: {
+            &quot;title&quot;: &quot;Ministry of Truth&quot;,
+            &quot;short_name&quot;: &quot;Minitrue&quot;
+          },
+          &quot;small_icon&quot;: &quot;http://127.0.0.1:8001/api/image/6/&quot;,
+          &quot;is_deleted&quot;: false
+        },
+        &quot;change_details&quot;: []
+      },
+      &quot;current_rejection&quot;: null,
+      &quot;listing_type&quot;: {
+        &quot;title&quot;: &quot;web application&quot;
+      },
+      &quot;title&quot;: &quot;Air Mail&quot;,
+      &quot;approved_date&quot;: &quot;2016-08-26T16:49:28.414100Z&quot;,
+      &quot;edited_date&quot;: &quot;2016-08-26T16:49:28.414130Z&quot;,
+      &quot;description&quot;: &quot;Sends mail via air&quot;,
+      &quot;launch_url&quot;: &quot;https://localhost:8443/demo_apps/centerSampleListings/airMail/index.html&quot;,
+      &quot;version_name&quot;: &quot;1.0.0&quot;,
+      &quot;unique_name&quot;: &quot;aml.test.air_mail&quot;,
+      &quot;what_is_new&quot;: &quot;Nothing really new here&quot;,
+      &quot;description_short&quot;: &quot;Sends airmail&quot;,
+      &quot;requirements&quot;: &quot;None&quot;,
+      &quot;approval_status&quot;: &quot;APPROVED&quot;,
+      &quot;is_enabled&quot;: true,
+      &quot;is_featured&quot;: true,
+      &quot;is_deleted&quot;: false,
+      &quot;avg_rate&quot;: 3,
+      &quot;total_votes&quot;: 3,
+      &quot;total_rate5&quot;: 1,
+      &quot;total_rate4&quot;: 0,
+      &quot;total_rate3&quot;: 1,
+      &quot;total_rate2&quot;: 0,
+      &quot;total_rate1&quot;: 1,
+      &quot;total_reviews&quot;: 3,
+      &quot;iframe_compatible&quot;: false,
+      &quot;security_marking&quot;: &quot;UNCLASSIFIED&quot;,
+      &quot;is_private&quot;: false,
+      &quot;required_listings&quot;: null
+    },
+    ....
+  ]
+}
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../wiki/" class="btn btn-neutral float-right" title="Wiki">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../shared_folders_2018/" class="btn btn-neutral" title="Shared folders 2018"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../shared_folders_2018/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../wiki/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>

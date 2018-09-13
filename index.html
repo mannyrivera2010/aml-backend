@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="None">
+  
+  <link rel="shortcut icon" href="./img/favicon.ico">
+  <title>Home - aml-backend</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="./css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="./css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Home";
+    var mkdocs_page_input_path = "index.md";
+    var mkdocs_page_url = "/";
+  </script>
+  
+  <script src="./js/jquery-2.1.1.min.js"></script>
+  <script src="./js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="./js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="." class="icon icon-home"> aml-backend</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href=".">Home</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#background">Background</a></li>
+    
+
+    <li class="toctree-l2"><a href="#3rd-party-services">3rd Party Services</a></li>
+    
+
+    <li class="toctree-l2"><a href="#getting-started">Getting Started</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#development-environment-preparation">Development environment preparation</a></li>
+        
+            <li><a class="toctree-l3" href="#building-and-running-the-aml-backend">Building and running the AML backend</a></li>
+        
+            <li><a class="toctree-l3" href="#makefile">MakeFile</a></li>
+        
+            <li><a class="toctree-l3" href="#postgres-setup">Postgres Setup</a></li>
+        
+            <li><a class="toctree-l3" href="#local-development-method-minimal">Local development method (minimal)</a></li>
+        
+            <li><a class="toctree-l3" href="#aml-ansible-method">aml-ansible method</a></li>
+        
+            <li><a class="toctree-l3" href="#runing-elasticsearch-for-search">Runing Elasticsearch for Search</a></li>
+        
+            <li><a class="toctree-l3" href="#installing-and-running-elasticsearch">Installing and Running Elasticsearch</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l2"><a href="#releasing">Releasing</a></li>
+    
+
+    <li class="toctree-l2"><a href="#controlling-access">Controlling Access</a></li>
+    
+
+    <li class="toctree-l2"><a href="#sample-users-for-basicauth">Sample Users for BasicAuth</a></li>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="ascii-entities/">Ascii entities</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="debugging/">Debugging</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="developer/">Developer</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="domain_knowledge/">Domain knowledge</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="jenkins/">Jenkins</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="requirements/">Requirements</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Features</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="features/elasticsearch_upgrade_2.x_6.x/">Elasticsearch upgrade 2.x 6.x</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="features/notification/">Notification</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="features/recommender_2017/">Recommender 2017</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="features/shared_folders_2018/">Shared folders 2018</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="features/smart_search/">Smart search</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="features/wiki/">Wiki</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href=".">aml-backend</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Home</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="background">Background</h2>
+<p>Django-based backend API<br />
+<strong>aml-backend</strong> replaces <a href="https://github.com/aml-development/aml-rest">aml-rest</a></p>
+<p>Notable differences include:    </p>
+<ul>
+<li>Python vs. Java/Groovy</li>
+<li>Django, Django Rest Framework vs. Grails, JAX-RS</li>
+<li>Postgres vs. MySQL</li>
+</ul>
+<h2 id="3rd-party-services">3rd Party Services</h2>
+<p>Project relays on  <br />
+Travis-CI  <a href="https://travis-ci.org/aml-development/aml-backend"><img alt="Build Status" src="https://travis-ci.org/aml-development/aml-backend.svg?branch=master" /></a></p>
+<h2 id="getting-started">Getting Started</h2>
+<h3 id="development-environment-preparation">Development environment preparation</h3>
+<pre><code>cd ~
+mkdir git
+cd git
+git clone git@github.com:aml-development/aml-backend.git
+cd aml-backend
+virtualenv env
+source env/bin/activate
+pip install -r requirements.txt
+</code></pre>
+
+<p>If <code>virtualenv env</code> does not work it might be <code>python3 -m venv env</code> if the environment</p>
+<h3 id="building-and-running-the-aml-backend">Building and running the AML backend</h3>
+<pre><code>cd ~/git/aml-backend
+source env/bin/activate
+make dev
+</code></pre>
+
+<h3 id="makefile">MakeFile</h3>
+<p>There is a MakeFile in the project to run repetitive commands    </p>
+<p><strong>Commands to setup server</strong>  <br />
+<code>make pyenv</code> - Create Python environment and install requirements  <br />
+<code>make dev run</code> - Setup up the Development environment and run server on a SQLite Database without Elasticsearch  <br />
+<code>make dev</code> - Setup up the development environment running on a SQLite Database without Elasticsearch  <br />
+<code>make dev_psql</code> - Setup up the development environment running on a Postgres Database without Elasticsearch  <br />
+<code>make dev_es</code> - Setup up the development environment running on a SQLite Database with Elasticsearch   <br />
+<code>make reindex_es</code> - Reindex the data into Elasticsearch    </p>
+<p><strong>Commands to run server</strong>  <br />
+<code>make run</code> - Run the server  <br />
+<code>make run_es</code> - Run the server with Elasticsearch  <br />
+<code>make rung</code> - Run Server with gunicorn with a worker per core  <br />
+<code>make rung_es</code> - Run Server with gunicorn with a worker per core  <br />
+<code>make test</code> - Run all test  <br />
+<code>make ptest</code> - Run all test in parallel (increase speed of unit tests)</p>
+<p><strong>Commands server</strong>  <br />
+<code>make codecheck</code> - Run pycodestyle python linter on the code  <br />
+<code>make autopep</code> - Run tool to fix python code  <br />
+<code>make upgrade_requirements</code> - Update project python dependencies    </p>
+<h3 id="postgres-setup">Postgres Setup</h3>
+<p>Command to install postgresql (on Debian-based OS)</p>
+<pre><code>sudo apt-get install postgresql postgresql-contrib
+</code></pre>
+
+<p>Commands to setup postgresql for aml-backend</p>
+<pre><code>sudo -i -u postgres
+createuser aml_user
+psql -c 'ALTER USER aml_user CREATEDB;'
+psql -c &quot;ALTER USER &quot;aml_user&quot; WITH PASSWORD 'password';&quot;
+createdb aml
+psql -c 'GRANT ALL PRIVILEGES ON DATABASE aml TO aml_user;'
+</code></pre>
+
+<h3 id="local-development-method-minimal">Local development method (minimal)</h3>
+<p>To serve the application on your host machine with minimal external dependencies,
+do the following:</p>
+<ol>
+<li>Remove psycopg2 from requirements.txt (so that Postgres won't be required)</li>
+<li>Enable HTTP Basic Auth and disable PKI authentication. In settings.py,
+<code>REST_FRAMEWORK.DEFAULT_AUTHENTICATION_CLASSES</code> should be set to
+<code>'rest_framework.authentication.BasicAuthentication'</code></li>
+<li>Disable the authorization service. In settings.py, set <code>AML.USE_AUTH_SERVER</code>
+to <code>False</code></li>
+<li>In settings.py, set <code>AML.DEMO_APP_ROOT</code> to <code>localhost:8000</code> (or wherever
+the django app will be served at)</li>
+</ol>
+<p>Then, do the following:</p>
+<ol>
+<li>Install Python 3.4.3. Python can be installed by downloading the appropriate
+    files <a href="https://www.python.org/downloads/release/python-343/">here</a>. Note
+    that Python 3.4 includes both <code>pip</code> and <code>venv</code>, a built-in replacement
+    for the <code>virtualenv</code> package</li>
+<li>Create a new python environment using python 3.4.x. First, create a new
+    directory where this environment will live, for example, in
+    <code>~/python_envs/aml</code>. Now create a new environment there:
+    <code>python3.4 -m venv ENV</code> (where <code>ENV</code> is the path you used above)</li>
+<li>Active the new environment: <code>source ENV/bin/activate</code></li>
+<li>Install the necessary dependencies into this python environment:
+    <code>pip install -r requirements.txt</code></li>
+<li>Run the server: <code>make dev</code></li>
+</ol>
+<p>Swagger documentation for the api is available at <code>http://localhost:8000/docs/</code>
+Use username <code>wsmith</code> password <code>password</code> when prompted for authentication info</p>
+<p>There's also the admin interface at <code>http://localhost:8000/admin</code>
+(username: <code>wsmith</code>, password: <code>password</code>)</p>
+<h3 id="aml-ansible-method">aml-ansible method</h3>
+<p>For those who just want to get AML up and running, see the
+<a href="https://github.com/aml-development/aml-ansible#quickstart">quickstart</a> of the <a href="https://github.com/aml-development/aml-ansible">aml-ansible</a> project.</p>
+<p>The recommended approach is to use the vagrant box referenced at the beginning
+of this README, which will create a production-esque deployment of AML:</p>
+<ul>
+<li>Postgres (vs. SQLite)</li>
+<li>PKI (vs. HTTP Basic Auth)</li>
+<li>Use of external authorization service</li>
+<li>Enable HTTPS (via nginx reverse proxy)</li>
+<li>Served via Gunicorn (vs. Django development server)</li>
+</ul>
+<h3 id="runing-elasticsearch-for-search">Runing Elasticsearch for Search</h3>
+<p>aml/Settings.py file variable needs to be updated to <code>ES_ENABLED = True</code>  <br />
+After installing Elasticsearch run <code>make reindex_es</code> and run <code>make run_es</code> in the aml-backend folder while inside of your $env     </p>
+<h3 id="installing-and-running-elasticsearch">Installing and Running Elasticsearch</h3>
+<p>aml-backend requires Elasticsearch 2.4.1  <br />
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.4/_installation.html">Installation Guide for 2.4.1</a></p>
+<p>The requirement for installing Elasticsearch is Java 7.  <br />
+Preferably, you should install the latest version of the official Java from www.java.com.    </p>
+<p>You can get the Elasticsearch 2.4.1 from https://www.elastic.co/blog/elasticsearch-2-4-1-released.  <br />
+To install Elasticsearch, download and extract the archive file for your platform.  <br />
+Once you’ve extracted the archive file, Elasticsearch is ready to run.   </p>
+<p>Below are the commands:</p>
+<pre><code>wget https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.4.1/elasticsearch-2.4.1.tar.gz
+tar xvf elasticsearch-2.4.1.tar.gz
+cd elasticsearch-2.4.1
+./bin/elasticsearch
+</code></pre>
+
+<p><strong>Tip</strong>  <br />
+When installing Elasticsearch in production, you can choose to use the Debian or RPM packages provided on the downloads page.  <br />
+You can also use the officially supported Puppet module, Chef cookbook, or Ansible.    </p>
+<h2 id="releasing">Releasing</h2>
+<p>Run <code>python release.py</code> to generate a tarball with Wheels for the application
+and all of its dependencies. See <code>release.py</code> for details</p>
+<h2 id="controlling-access">Controlling Access</h2>
+<p>Anonymous users have no access - all must have a valid username/password (dev)
+or valid certificate (production) to be granted any access</p>
+<p>A few endpoints only provide READ access:</p>
+<ul>
+<li>storefront</li>
+<li>metadata</li>
+</ul>
+<p>Several resources allow global READ access with WRITE access restricted to
+Apps Mall Stewards:</p>
+<ul>
+<li>access_control</li>
+<li>agency</li>
+<li>category</li>
+<li>contact_type</li>
+<li>listing_type</li>
+</ul>
+<p><strong>image</strong></p>
+<ul>
+<li>global READ of metadata, but access_control enforcement on the images
+themselves</li>
+<li>WRITE access allowed for all users, but the associated access_control level
+    cannot exceed that of the current user</li>
+</ul>
+<p><strong>intent</strong></p>
+<ul>
+<li>global READ and WRITE allowed, but associated intent.icon.access_control
+    cannot exceed that of the current user</li>
+</ul>
+<p><strong>library</strong></p>
+<ul>
+<li>READ access for ORG stewards and above</li>
+<li>no WRITE access</li>
+<li>READ and WRITE access to /self/library for the current user</li>
+</ul>
+<p><strong>notification</strong></p>
+<ul>
+<li>global READ access</li>
+<li>WRITE access restricted to Org Stewards and above, unless the notification
+    is associated with a Listing owned by this user</li>
+<li>READ and WRITE access to /self/notification for the current user</li>
+</ul>
+<p><strong>profile</strong></p>
+<ul>
+<li>READ access restrictpython manage.py runscript sample_dated to Org Stewards and above</li>
+<li>WRITE access restricted to the associated user (users cannot create, modify,
+    or delete users other than themselves)</li>
+<li>READ and WRITE access to /self/profile for the current user</li>
+</ul>
+<p><strong>listing</strong></p>
+<ul>
+<li>READ access restricted by agency (if listing is private) and by access_control
+    level</li>
+<li>WRITE access:<ul>
+<li>global WRITE access to create/modify/delete a listing in the draft or
+    pending state ONLY</li>
+<li>Org Stewards and above can change the state to published/approved or
+    rejected, and change state to enabled/disabled, but must respect
+    Organization (an Org Steward cannot modify
+    a listing for which they are not the owner and/or not a member of
+    the listing's agency)</li>
+<li>global WRITE access to create/modify/delete reviews (item_comment) for
+    any listing (must respect organization (if private) and access_control)</li>
+</ul>
+</li>
+<li>READ access to /self/listing to return listings that current user owns (?)</li>
+</ul>
+<p><strong>Permission Types</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">Permission Types</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">read</td>
+<td align="left">The Read permission refers to a user's capability to read the contents of the endpoint.</td>
+</tr>
+<tr>
+<td align="left">write</td>
+<td align="left">The Write permission refers to a user's capability to write contents to the endpoint.</td>
+</tr>
+<tr>
+<td align="left">access_control enforcement flag</td>
+<td align="left">access_control level cannot exceed that of the current user</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Access Control Matrix</strong>
+<table>
+    <tr>
+        <th>aml-center</th>
+        <th colspan="5">Access Control</th>
+    </tr></p>
+<pre><code>&lt;tr&gt;
+    &lt;th&gt;Endpoint&lt;/th&gt;
+    &lt;th&gt;Anonymous Users&lt;/th&gt;
+    &lt;th&gt;Self&lt;/th&gt;
+    &lt;th&gt;Other&lt;/th&gt;
+    &lt;th&gt;Org Steward&lt;/th&gt;
+    &lt;th&gt;Apps Mall Steward &lt;/th&gt;
+    &lt;th&gt;Notes&lt;/th&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+    &lt;td&gt;access_control (?)&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;r--&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;r--&lt;/td&gt;
+    &lt;td&gt;rw-&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+    &lt;td&gt;agency&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;r--&lt;/td&gt;
+    &lt;td&gt;r--&lt;/td&gt;
+    &lt;td&gt;r--&lt;/td&gt;
+    &lt;td&gt;rw-&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+    &lt;td&gt;category&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;r--&lt;/td&gt;
+    &lt;td&gt;r--&lt;/td&gt;
+    &lt;td&gt;r--&lt;/td&gt;
+    &lt;td&gt;rw-&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+    &lt;td&gt;contact_type&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;r--&lt;/td&gt;
+    &lt;td&gt;r--&lt;/td&gt;
+    &lt;td&gt;r--&lt;/td&gt;
+    &lt;td&gt;rw-&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+    &lt;td&gt;image (metadata)&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;rwa&lt;/td&gt;
+    &lt;td&gt;rwa&lt;/td&gt;
+    &lt;td&gt;rwa&lt;/td&gt;
+    &lt;td&gt;rwa&lt;/td&gt;
+    &lt;td&gt;Read: access_control enforcement on the images themselves, Write: associated access_control level cannot exceed that of the current user&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+    &lt;td&gt;intent&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;rwa&lt;/td&gt;
+    &lt;td&gt;rwa&lt;/td&gt;
+    &lt;td&gt;rwa&lt;/td&gt;
+    &lt;td&gt;rwa&lt;/td&gt;
+    &lt;td&gt;associated intent.icon.access_control cannot exceed that of the current user&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+    &lt;td&gt;library&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;r--&lt;/td&gt;
+    &lt;td&gt;r--&lt;/td&gt;
+    &lt;td&gt;r--&lt;/td&gt;
+    &lt;td&gt;r--&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+    &lt;td&gt;library (self)&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;rw-&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+    &lt;td&gt;listing&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;r-a&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;rw-&lt;/td&gt;
+    &lt;td&gt;rw-&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+    &lt;td&gt;listing (self)&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;rw-&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+    &lt;td&gt;listing_type (?)&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;r--&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;r--&lt;/td&gt;
+    &lt;td&gt;rw-&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+    &lt;td&gt;notification&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;rw-&lt;/td&gt;
+    &lt;td&gt;r--&lt;/td&gt;
+    &lt;td&gt;rw-&lt;/td&gt;
+    &lt;td&gt;rw-&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+    &lt;td&gt;profile&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;rw-&lt;/td&gt;
+    &lt;td&gt;rw-&lt;/td&gt;
+    &lt;td&gt;users cannot create, modify, or delete users other than themselves&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+    &lt;td&gt;profile (self route)&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;rw-&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;Self&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+    &lt;td&gt;storefront&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;R--&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;Get Storefront for current user&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+    &lt;td&gt;metadata&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;R--&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;---&lt;/td&gt;
+    &lt;td&gt;Get metadata for current user&lt;/td&gt;
+&lt;/tr&gt;
+</code></pre>
+</table>
+
+<h2 id="sample-users-for-basicauth">Sample Users for BasicAuth</h2>
+<p>By default, HTTP Basic Authentication is used for login.  <br />
+This can be changed to PKI (client certificates) by changing <code>REST_FRAMEWORK.DEFAULT_AUTHENTICATION_CLASSES</code> in <code>settings.py</code></p>
+<p>Below are usernames that are part of our sample data (defined in
+<code>aml-backend/amlcenter/scripts/sample_data_generator.py</code>) (password for all users is <code>password</code>):</p>
+<p><strong>Admins:</strong>    </p>
+<ul>
+<li>bigbrother (minipax)</li>
+<li>bigbrother2 (minitrue)</li>
+<li>khaleesi (miniplen)</li>
+</ul>
+<p><strong>Org Stewards:</strong>    </p>
+<ul>
+<li>wsmith (minitrue, stewarded_orgs: minitrue)    </li>
+<li>julia (minitrue, stewarded_orgs: minitrue, miniluv)    </li>
+<li>obrien (minipax, stewarded_orgs: minipax, miniplenty)     </li>
+</ul>
+<p><strong>Users:</strong>    </p>
+<ul>
+<li>aaronson (miniluv)</li>
+<li>hodor (miniluv - PKI)</li>
+<li>jones (minitrue)</li>
+<li>tammy (minitrue - PKI)</li>
+<li>rutherford (miniplenty)</li>
+<li>noah (miniplenty - PKI)</li>
+<li>syme (minipax)</li>
+<li>abe (minipax - PKI)</li>
+<li>tparsons (minipax, miniluv)</li>
+<li>jsnow (minipax, miniluv - PKI)</li>
+<li>charrington (minipax, miniluv, minitrue)</li>
+<li>johnson (minipax, miniluv, minitrue - PKI)</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ascii-entities/" class="btn btn-neutral float-right" title="Ascii entities">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+      
+        <span style="margin-left: 15px"><a href="ascii-entities/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="./js/theme.js"></script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 0.16.3
+Build Date UTC : 2018-09-13 12:27:46
+-->

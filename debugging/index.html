@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Debugging - aml-backend</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Debugging";
+    var mkdocs_page_input_path = "debugging.md";
+    var mkdocs_page_url = "/debugging/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> aml-backend</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../ascii-entities/">Ascii entities</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Debugging</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#tracing-rest-call">Tracing REST Call</a></li>
+    
+
+    <li class="toctree-l2"><a href="#performance-debugging">Performance Debugging</a></li>
+    
+
+    <li class="toctree-l2"><a href="#getting-all-profiles-without-any-optimizations">Getting all Profiles (without any optimizations)</a></li>
+    
+
+    <li class="toctree-l2"><a href="#getting-all-profiles-with-join">Getting all Profiles (with join)</a></li>
+    
+
+    <li class="toctree-l2"><a href="#debugging-storefront-serializer">Debugging Storefront Serializer</a></li>
+    
+
+    <li class="toctree-l2"><a href="#improving-put_counts_in_listings_endpoint-database-example">Improving put_counts_in_listings_endpoint database example</a></li>
+    
+
+    <li class="toctree-l2"><a href="#improving-put_counts_in_listings_endpoint-database-example_1">Improving put_counts_in_listings_endpoint database example</a></li>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../developer/">Developer</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../domain_knowledge/">Domain knowledge</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../jenkins/">Jenkins</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../requirements/">Requirements</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Features</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../features/elasticsearch_upgrade_2.x_6.x/">Elasticsearch upgrade 2.x 6.x</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../features/notification/">Notification</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../features/recommender_2017/">Recommender 2017</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../features/shared_folders_2018/">Shared folders 2018</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../features/smart_search/">Smart search</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../features/wiki/">Wiki</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">aml-backend</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Debugging</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="tracing-rest-call">Tracing REST Call</h2>
+<p>This section describes the life of a REST call.  <br />
+Developer should have knownledge of</p>
+<ul>
+<li><a href="https://docs.djangoproject.com/es/1.9/topics/http/urls/">Django's URL Dispatcher</a></li>
+<li><a href="http://www.django-rest-framework.org/api-guide/viewsets/">Django Rest Framework's Viewsets</a></li>
+<li><a href="http://www.django-rest-framework.org/api-guide/serializers/">Django Rest Framework's Serializer</a></li>
+</ul>
+<p>Example trace for a GET Request for getting a user's profile for an authenticated user   <br />
+<code>GET /api/self/profile</code></p>
+<ul>
+<li>Entry Point for all REST Calls - aml/urls.py. All /api/* calls get re-routed to amlcenter/urls.py file    </li>
+<li>amlcenter/urls.py add REST access points for all the views for the resources (agency, category, etc...)    <ul>
+<li>This line of code <code>url(r'', include('amlcenter.api.profile.urls'))</code> adds endpoints related to profile REST Calls</li>
+</ul>
+</li>
+<li>amlcenter/api/profile/user.py - 'self/profile/' route points to current user's profile (Using CurrentUserViewSet in amlcenter/api/profile/views.py)</li>
+<li>amlcenter/api/profile/views.py - For GET Request for this route it will call the 'retrieve' method<ul>
+<li>Before allowing user to access the endpoint it will make sure user is authenticated and has the correct role using 'permission_classes = (permissions.IsUser,)'</li>
+</ul>
+</li>
+</ul>
+<h2 id="performance-debugging">Performance Debugging</h2>
+<p>We check the performance of a Database model using shell_plus command for manage.py.</p>
+<pre><code class="shell">python manage.py shell_plus --print-sql
+</code></pre>
+
+<pre><code class="python"># Shell Plus Model Imports
+from corsheaders.models import CorsModel
+from django.contrib.admin.models import LogEntry
+from django.contrib.auth.models import Group, Permission, User
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.sessions.models import Session
+from amlcenter.models import Agency, ApplicationLibraryEntry, Category, ChangeDetail, Contact, ContactType, DocUrl, Image, ImageType, Intent, Listing, ListingActivity, ListingType, Notification, Profile, Review, Screenshot, Tag
+# Shell Plus Django Imports
+from django.utils import timezone
+from django.conf import settings
+from django.core.cache import cache
+from django.core.urlresolvers import reverse
+from django.db.models import Avg, Count, F, Max, Min, Sum, Q, Prefetch
+from django.db import transaction
+Python 3.4.3 (default, Feb 25 2016, 10:08:19)
+[GCC 4.8.2] on linux
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+(InteractiveConsole)
+&gt;&gt;&gt;
+</code></pre>
+
+<h2 id="getting-all-profiles-without-any-optimizations">Getting all Profiles (without any optimizations)</h2>
+<pre><code class="python">&gt;&gt;&gt; Profile.objects.all()
+QUERY = 'SELECT &quot;amlcenter_profile&quot;.&quot;id&quot;, &quot;amlcenter_profile&quot;.&quot;display_name&quot;, &quot;amlcenter_profile&quot;.&quot;bio&quot;, &quot;amlcenter_profile&quot;.&quot;center_tour_flag&quot;, &quot;amlcenter_profile&quot;.&quot;hud_tour_flag&quot;, &quot;amlcenter_profile&quot;.&quot;webtop_tour_flag&quot;, &quot;amlcenter_profile&quot;.&quot;dn&quot;, &quot;amlcenter_profile&quot;.&quot;issuer_dn&quot;, &quot;amlcenter_profile&quot;.&quot;auth_expires&quot;, &quot;amlcenter_profile&quot;.&quot;access_control&quot;, &quot;amlcenter_profile&quot;.&quot;user_id&quot; FROM &quot;amlcenter_profile&quot; LIMIT 21' - PARAMS = ()
+
+Execution time: 0.000324s [Database: default]
+
+QUERY = 'SELECT &quot;auth_user&quot;.&quot;id&quot;, &quot;auth_user&quot;.&quot;password&quot;, &quot;auth_user&quot;.&quot;last_login&quot;, &quot;auth_user&quot;.&quot;is_superuser&quot;, &quot;auth_user&quot;.&quot;username&quot;, &quot;auth_user&quot;.&quot;first_name&quot;, &quot;auth_user&quot;.&quot;last_name&quot;, &quot;auth_user&quot;.&quot;email&quot;, &quot;auth_user&quot;.&quot;is_staff&quot;, &quot;auth_user&quot;.&quot;is_active&quot;, &quot;auth_user&quot;.&quot;date_joined&quot; FROM &quot;auth_user&quot; WHERE &quot;auth_user&quot;.&quot;id&quot; = %s' - PARAMS = (1,)
+
+Execution time: 0.000207s [Database: default]
+
+QUERY = 'SELECT &quot;auth_user&quot;.&quot;id&quot;, &quot;auth_user&quot;.&quot;password&quot;, &quot;auth_user&quot;.&quot;last_login&quot;, &quot;auth_user&quot;.&quot;is_superuser&quot;, &quot;auth_user&quot;.&quot;username&quot;, &quot;auth_user&quot;.&quot;first_name&quot;, &quot;auth_user&quot;.&quot;last_name&quot;, &quot;auth_user&quot;.&quot;email&quot;, &quot;auth_user&quot;.&quot;is_staff&quot;, &quot;auth_user&quot;.&quot;is_active&quot;, &quot;auth_user&quot;.&quot;date_joined&quot; FROM &quot;auth_user&quot; WHERE &quot;auth_user&quot;.&quot;id&quot; = %s' - PARAMS = (2,)
+
+Execution time: 0.000203s [Database: default]
+
+QUERY = 'SELECT &quot;auth_user&quot;.&quot;id&quot;, &quot;auth_user&quot;.&quot;password&quot;, &quot;auth_user&quot;.&quot;last_login&quot;, &quot;auth_user&quot;.&quot;is_superuser&quot;, &quot;auth_user&quot;.&quot;username&quot;, &quot;auth_user&quot;.&quot;first_name&quot;, &quot;auth_user&quot;.&quot;last_name&quot;, &quot;auth_user&quot;.&quot;email&quot;, &quot;auth_user&quot;.&quot;is_staff&quot;, &quot;auth_user&quot;.&quot;is_active&quot;, &quot;auth_user&quot;.&quot;date_joined&quot; FROM &quot;auth_user&quot; WHERE &quot;auth_user&quot;.&quot;id&quot; = %s' - PARAMS = (3,)
+
+Execution time: 0.000202s [Database: default]
+
+QUERY = 'SELECT &quot;auth_user&quot;.&quot;id&quot;, &quot;auth_user&quot;.&quot;password&quot;, &quot;auth_user&quot;.&quot;last_login&quot;, &quot;auth_user&quot;.&quot;is_superuser&quot;, &quot;auth_user&quot;.&quot;username&quot;, &quot;auth_user&quot;.&quot;first_name&quot;, &quot;auth_user&quot;.&quot;last_name&quot;, &quot;auth_user&quot;.&quot;email&quot;, &quot;auth_user&quot;.&quot;is_staff&quot;, &quot;auth_user&quot;.&quot;is_active&quot;, &quot;auth_user&quot;.&quot;date_joined&quot; FROM &quot;auth_user&quot; WHERE &quot;auth_user&quot;.&quot;id&quot; = %s' - PARAMS = (4,)
+
+Execution time: 0.000124s [Database: default]
+
+QUERY = 'SELECT &quot;auth_user&quot;.&quot;id&quot;, &quot;auth_user&quot;.&quot;password&quot;, &quot;auth_user&quot;.&quot;last_login&quot;, &quot;auth_user&quot;.&quot;is_superuser&quot;, &quot;auth_user&quot;.&quot;username&quot;, &quot;auth_user&quot;.&quot;first_name&quot;, &quot;auth_user&quot;.&quot;last_name&quot;, &quot;auth_user&quot;.&quot;email&quot;, &quot;auth_user&quot;.&quot;is_staff&quot;, &quot;auth_user&quot;.&quot;is_active&quot;, &quot;auth_user&quot;.&quot;date_joined&quot; FROM &quot;auth_user&quot; WHERE &quot;auth_user&quot;.&quot;id&quot; = %s' - PARAMS = (5,)
+
+Execution time: 0.000101s [Database: default]
+
+QUERY = 'SELECT &quot;auth_user&quot;.&quot;id&quot;, &quot;auth_user&quot;.&quot;password&quot;, &quot;auth_user&quot;.&quot;last_login&quot;, &quot;auth_user&quot;.&quot;is_superuser&quot;, &quot;auth_user&quot;.&quot;username&quot;, &quot;auth_user&quot;.&quot;first_name&quot;, &quot;auth_user&quot;.&quot;last_name&quot;, &quot;auth_user&quot;.&quot;email&quot;, &quot;auth_user&quot;.&quot;is_staff&quot;, &quot;auth_user&quot;.&quot;is_active&quot;, &quot;auth_user&quot;.&quot;date_joined&quot; FROM &quot;auth_user&quot; WHERE &quot;auth_user&quot;.&quot;id&quot; = %s' - PARAMS = (6,)
+
+Execution time: 0.000145s [Database: default]
+
+QUERY = 'SELECT &quot;auth_user&quot;.&quot;id&quot;, &quot;auth_user&quot;.&quot;password&quot;, &quot;auth_user&quot;.&quot;last_login&quot;, &quot;auth_user&quot;.&quot;is_superuser&quot;, &quot;auth_user&quot;.&quot;username&quot;, &quot;auth_user&quot;.&quot;first_name&quot;, &quot;auth_user&quot;.&quot;last_name&quot;, &quot;auth_user&quot;.&quot;email&quot;, &quot;auth_user&quot;.&quot;is_staff&quot;, &quot;auth_user&quot;.&quot;is_active&quot;, &quot;auth_user&quot;.&quot;date_joined&quot; FROM &quot;auth_user&quot; WHERE &quot;auth_user&quot;.&quot;id&quot; = %s' - PARAMS = (7,)
+
+Execution time: 0.000145s [Database: default]
+
+QUERY = 'SELECT &quot;auth_user&quot;.&quot;id&quot;, &quot;auth_user&quot;.&quot;password&quot;, &quot;auth_user&quot;.&quot;last_login&quot;, &quot;auth_user&quot;.&quot;is_superuser&quot;, &quot;auth_user&quot;.&quot;username&quot;, &quot;auth_user&quot;.&quot;first_name&quot;, &quot;auth_user&quot;.&quot;last_name&quot;, &quot;auth_user&quot;.&quot;email&quot;, &quot;auth_user&quot;.&quot;is_staff&quot;, &quot;auth_user&quot;.&quot;is_active&quot;, &quot;auth_user&quot;.&quot;date_joined&quot; FROM &quot;auth_user&quot; WHERE &quot;auth_user&quot;.&quot;id&quot; = %s' - PARAMS = (8,)
+
+Execution time: 0.000131s [Database: default]
+
+QUERY = 'SELECT &quot;auth_user&quot;.&quot;id&quot;, &quot;auth_user&quot;.&quot;password&quot;, &quot;auth_user&quot;.&quot;last_login&quot;, &quot;auth_user&quot;.&quot;is_superuser&quot;, &quot;auth_user&quot;.&quot;username&quot;, &quot;auth_user&quot;.&quot;first_name&quot;, &quot;auth_user&quot;.&quot;last_name&quot;, &quot;auth_user&quot;.&quot;email&quot;, &quot;auth_user&quot;.&quot;is_staff&quot;, &quot;auth_user&quot;.&quot;is_active&quot;, &quot;auth_user&quot;.&quot;date_joined&quot; FROM &quot;auth_user&quot; WHERE &quot;auth_user&quot;.&quot;id&quot; = %s' - PARAMS = (9,)
+
+Execution time: 0.000099s [Database: default]
+
+QUERY = 'SELECT &quot;auth_user&quot;.&quot;id&quot;, &quot;auth_user&quot;.&quot;password&quot;, &quot;auth_user&quot;.&quot;last_login&quot;, &quot;auth_user&quot;.&quot;is_superuser&quot;, &quot;auth_user&quot;.&quot;username&quot;, &quot;auth_user&quot;.&quot;first_name&quot;, &quot;auth_user&quot;.&quot;last_name&quot;, &quot;auth_user&quot;.&quot;email&quot;, &quot;auth_user&quot;.&quot;is_staff&quot;, &quot;auth_user&quot;.&quot;is_active&quot;, &quot;auth_user&quot;.&quot;date_joined&quot; FROM &quot;auth_user&quot; WHERE &quot;auth_user&quot;.&quot;id&quot; = %s' - PARAMS = (10,)
+
+Execution time: 0.000098s [Database: default]
+
+QUERY = 'SELECT &quot;auth_user&quot;.&quot;id&quot;, &quot;auth_user&quot;.&quot;password&quot;, &quot;auth_user&quot;.&quot;last_login&quot;, &quot;auth_user&quot;.&quot;is_superuser&quot;, &quot;auth_user&quot;.&quot;username&quot;, &quot;auth_user&quot;.&quot;first_name&quot;, &quot;auth_user&quot;.&quot;last_name&quot;, &quot;auth_user&quot;.&quot;email&quot;, &quot;auth_user&quot;.&quot;is_staff&quot;, &quot;auth_user&quot;.&quot;is_active&quot;, &quot;auth_user&quot;.&quot;date_joined&quot; FROM &quot;auth_user&quot; WHERE &quot;auth_user&quot;.&quot;id&quot; = %s' - PARAMS = (11,)
+
+Execution time: 0.000096s [Database: default]
+
+[Profile: wsmith, Profile: julia, Profile: obrien, Profile: bigbrother, Profile: bigbrother2, Profile: aaronson, Profile: jones, Profile: rutherford, Profile: syme, Profile: tparsons, Profile: charrington]
+
+</code></pre>
+
+<p>Results:
+12 database calls ( 1 + num of user = Database calls)</p>
+<h2 id="getting-all-profiles-with-join">Getting all Profiles (with join)</h2>
+<pre><code class="python">&gt;&gt;&gt; Profile.objects.all().select_related('user')
+QUERY = 'SELECT &quot;amlcenter_profile&quot;.&quot;id&quot;, &quot;amlcenter_profile&quot;.&quot;display_name&quot;, &quot;amlcenter_profile&quot;.&quot;bio&quot;, &quot;amlcenter_profile&quot;.&quot;center_tour_flag&quot;, &quot;amlcenter_profile&quot;.&quot;hud_tour_flag&quot;, &quot;amlcenter_profile&quot;.&quot;webtop_tour_flag&quot;, &quot;amlcenter_profile&quot;.&quot;dn&quot;, &quot;amlcenter_profile&quot;.&quot;issuer_dn&quot;, &quot;amlcenter_profile&quot;.&quot;auth_expires&quot;, &quot;amlcenter_profile&quot;.&quot;access_control&quot;, &quot;amlcenter_profile&quot;.&quot;user_id&quot;, &quot;auth_user&quot;.&quot;id&quot;, &quot;auth_user&quot;.&quot;password&quot;, &quot;auth_user&quot;.&quot;last_login&quot;, &quot;auth_user&quot;.&quot;is_superuser&quot;, &quot;auth_user&quot;.&quot;username&quot;, &quot;auth_user&quot;.&quot;first_name&quot;, &quot;auth_user&quot;.&quot;last_name&quot;, &quot;auth_user&quot;.&quot;email&quot;, &quot;auth_user&quot;.&quot;is_staff&quot;, &quot;auth_user&quot;.&quot;is_active&quot;, &quot;auth_user&quot;.&quot;date_joined&quot; FROM &quot;amlcenter_profile&quot; LEFT OUTER JOIN &quot;auth_user&quot; ON ( &quot;amlcenter_profile&quot;.&quot;user_id&quot; = &quot;auth_user&quot;.&quot;id&quot; ) LIMIT 21' - PARAMS = ()
+
+Execution time: 0.000472s [Database: default]
+
+[Profile: wsmith, Profile: julia, Profile: obrien, Profile: bigbrother, Profile: bigbrother2, Profile: aaronson, Profile: jones, Profile: rutherford, Profile: syme, Profile: tparsons, Profile: charrington]
+</code></pre>
+
+<p>Results:
+1 database call</p>
+<h2 id="debugging-storefront-serializer">Debugging Storefront Serializer</h2>
+<pre><code class="python">from rest_framework.response import Response
+import amlcenter.api.storefront.model_access as ma
+import amlcenter.api.storefront.serializers as se
+import timeit
+from django.test.client import RequestFactory
+
+rf = RequestFactory()
+get_request = rf.get('/hello/')
+
+data = ma.get_storefront('bigbrother') # Database calls
+sea = se.StorefrontSerializer(data,context={'request':get_request})
+start = timeit.timeit(); r= Response(sea.data) ; end = timeit.timeit() # Database calls
+print('Time: %s' % end)
+</code></pre>
+
+<h2 id="improving-put_counts_in_listings_endpoint-database-example">Improving <code>put_counts_in_listings_endpoint</code> database example</h2>
+<pre><code>import time
+from django.db import transaction
+
+
+def show_db_calls():
+    db_connection = transaction.get_connection()
+    number_of_calls = len(db_connection.queries)
+    db_connection.queries_log.clear()
+    return number_of_calls
+
+
+def group_by_sum(count_data_list, group_key, count_key='agency_count'):
+    &quot;&quot;&quot;
+    { &quot;agency__id&quot;: 1, &quot;agency_count&quot;: 39, &quot;approval_status&quot;: &quot;APPROVED&quot;, &quot;is_enabled&quot;: true},
+
+    returns
+        dict
+    &quot;&quot;&quot;
+    count_dict = {}
+
+    for record_dict in count_data_list:
+        group_key_in_record = group_key in record_dict
+
+        if group_key_in_record:
+            group_key_value = record_dict[group_key]
+            group_key_count_value = record_dict[count_key]
+            group_key_value_in_count_dict = group_key_value in count_dict
+
+            if group_key_value_in_count_dict:
+                count_dict[group_key_value] = count_dict[group_key_value] + group_key_count_value
+            else:
+                count_dict[group_key_value] = group_key_count_value
+
+    total_count = 0
+
+    for key in count_dict:
+        value = count_dict[key]
+        total_count = total_count + value
+
+    count_dict['_total_count'] = total_count
+
+    return count_dict
+
+
+def put_counts_in_listings_endpoint_new(queryset):
+    &quot;&quot;&quot;
+    Add counts to the listing/ endpoint
+
+    Args:
+        querset: models.Listing queryset
+
+    Returns:
+        {
+            total&quot;: &lt;total listings&gt;,
+            organizations: {
+                &lt;org_id&gt;: &lt;int&gt;,
+                ...
+            },
+            enabled: &lt;enabled listings&gt;,
+            IN_PROGRESS: &lt;int&gt;,
+            PENDING: &lt;int&gt;,
+            PENDING_DELETION: &lt;int&gt;&quot;
+            REJECTED: &lt;int&gt;,
+            APPROVED_ORG: &lt;int&gt;,
+            APPROVED: &lt;int&gt;,
+            DELETED: &lt;int&gt;
+        }
+    &quot;&quot;&quot;
+    show_db_calls()
+    start_time = int(round(time.time() * 1000))
+    data = {}
+
+    count_data = (models.Listing
+                        .objects.filter(pk__in=queryset)
+                        .values('agency__id','is_enabled', 'approval_status')
+                        .annotate(agency_count=Count('agency__id')))
+
+    enabled_count = group_by_sum(count_data, 'is_enabled')
+
+    data['total'] = enabled_count.get('_total_count', 0)
+    data['enabled'] = enabled_count.get(True, 0)
+
+    agency_count = group_by_sum(count_data, 'agency__id')
+
+    data['organizations'] = {}
+
+    agency_ids = list(models.Agency.objects.values_list('id', flat=True))
+    for agency_id in agency_ids:
+        agency_id_str = str(agency_id)
+        if agency_id in agency_count:
+            data['organizations'][agency_id_str] = agency_count[agency_id]
+        else:
+            data['organizations'][agency_id_str] = '0'
+
+    approval_status_count = group_by_sum(count_data, 'approval_status')
+    approval_status_list = [
+        models.Listing.IN_PROGRESS,
+        models.Listing.PENDING,
+        models.Listing.REJECTED,
+        models.Listing.APPROVED_ORG,
+        models.Listing.APPROVED,
+        models.Listing.DELETED,
+        models.Listing.PENDING_DELETION
+    ]
+
+    for current_approval_status in approval_status_list:
+        data[current_approval_status] = approval_status_count.get(current_approval_status, 0)
+
+    data['_time'] = int(round(time.time() * 1000)) - start_time
+    data['_db_calls'] = show_db_calls()
+    return data
+
+
+def put_counts_in_listings_endpoint(queryset):
+    &quot;&quot;&quot;
+    Add counts to the listing/ endpoint
+
+    Args:
+        querset: models.Listing queryset
+
+    Returns:
+        {
+            total&quot;: &lt;total listings&gt;,
+            organizations: {
+                &lt;org_id&gt;: &lt;int&gt;,
+                ...
+            },
+            enabled: &lt;enabled listings&gt;,
+            IN_PROGRESS: &lt;int&gt;,
+            PENDING: &lt;int&gt;,
+            PENDING_DELETION: &lt;int&gt;&quot;
+            REJECTED: &lt;int&gt;,
+            APPROVED_ORG: &lt;int&gt;,
+            APPROVED: &lt;int&gt;,
+            DELETED: &lt;int&gt;
+        }
+    &quot;&quot;&quot;
+    show_db_calls()
+    start_time = int(round(time.time() * 1000))
+    # TODO: Take in account 2pki user (rivera-20160908)
+
+    data = {}
+
+    # Number of total listings
+    num_total = queryset.count()
+    # Number of listing that is Enabled
+    num_enabled = queryset.filter(is_enabled=True).count()
+
+    # Number of listing that is IN_PROGRESS
+    num_in_progress = queryset.filter(
+        approval_status=models.Listing.IN_PROGRESS).count()
+
+    # Number of listing that is PENDING
+    num_pending = queryset.filter(
+        approval_status=models.Listing.PENDING).count()
+
+    # Number of listing that is REJECTED
+    num_rejected = queryset.filter(
+        approval_status=models.Listing.REJECTED).count()
+
+    # Number of listing that is APPROVED_ORG
+    num_approved_org = queryset.filter(
+        approval_status=models.Listing.APPROVED_ORG).count()
+
+    # Number of listing that is APPROVED
+    num_approved = queryset.filter(
+        approval_status=models.Listing.APPROVED).count()
+
+    # Number of listing that is DELETED
+    num_deleted = queryset.filter(
+        approval_status=models.Listing.DELETED).count()
+
+    # Number of listing that is PENDING_DELETION
+    num_pending_deletion = queryset.filter(
+        approval_status=models.Listing.PENDING_DELETION).count()
+
+    data['total'] = num_total
+    data['enabled'] = num_enabled
+    data['organizations'] = {}
+    data[models.Listing.IN_PROGRESS] = num_in_progress
+    data[models.Listing.PENDING] = num_pending
+    data[models.Listing.REJECTED] = num_rejected
+    data[models.Listing.APPROVED_ORG] = num_approved_org
+    data[models.Listing.APPROVED] = num_approved
+    data[models.Listing.DELETED] = num_deleted
+    data[models.Listing.PENDING_DELETION] = num_pending_deletion
+
+    orgs = models.Agency.objects.all()
+    for i in orgs:
+        data['organizations'][str(i.id)] = queryset.filter(
+            agency__id=i.id).count()
+
+    data['_time'] = int(round(time.time() * 1000)) - start_time
+    data['_db_calls'] = show_db_calls()
+    return data
+</code></pre>
+
+<p><strong><code>put_counts_in_listings_endpoint</code> function results</strong>  <br />
+This function took 97 milliseconds and took 19 database calls</p>
+<pre><code>{
+    &quot;APPROVED_ORG&quot;: 0,
+    &quot;IN_PROGRESS&quot;: 0,
+    &quot;DELETED&quot;: 0,
+    &quot;PENDING&quot;: 0,
+    &quot;organizations&quot;: {
+        &quot;1&quot;: 2,
+        &quot;2&quot;: 1,
+        &quot;3&quot;: 0,
+        &quot;4&quot;: 0,
+        &quot;5&quot;: 0,
+        &quot;6&quot;: 0,
+        &quot;7&quot;: 0,
+        &quot;8&quot;: 0,
+        &quot;9&quot;: 0
+    },
+    &quot;total&quot;: 3,
+    &quot;_time&quot;: 97,
+    &quot;enabled&quot;: 3,
+    &quot;PENDING_DELETION&quot;: 0,
+    &quot;REJECTED&quot;: 0,
+    &quot;_db_calls&quot;: 19,
+    &quot;APPROVED&quot;: 3
+}
+</code></pre>
+
+<p><strong><code>put_counts_in_listings_endpoint_new</code> function results</strong>  <br />
+This function took 7 milliseconds and took 2 database calls</p>
+<pre><code>{
+   &quot;APPROVED_ORG&quot;: 0,
+   &quot;IN_PROGRESS&quot;: 0,
+   &quot;DELETED&quot;: 0,
+   &quot;PENDING&quot;: 0,
+   &quot;organizations&quot;: {
+       &quot;1&quot;: 2,
+       &quot;2&quot;: 1,
+       &quot;3&quot;: 0,
+       &quot;4&quot;: 0,
+       &quot;5&quot;: 0,
+       &quot;6&quot;: 0,
+       &quot;7&quot;: 0,
+       &quot;8&quot;: 0,
+       &quot;9&quot;: 0
+   },
+   &quot;total&quot;: 3,
+   &quot;_time&quot;: 7,
+   &quot;enabled&quot;: 3,
+   &quot;PENDING_DELETION&quot;: 0,
+   &quot;REJECTED&quot;: 0,
+   &quot;_db_calls&quot;: 2,
+   &quot;APPROVED&quot;: 3
+}
+</code></pre>
+
+<h2 id="improving-put_counts_in_listings_endpoint-database-example_1">Improving <code>put_counts_in_listings_endpoint</code> database example</h2>
+<p><strong><code>_update_rating</code> original code</strong>   </p>
+<pre><code>def _update_rating(username, listing):
+    &quot;&quot;&quot;
+    Invoked each time a review is created, deleted, or updated
+    &quot;&quot;&quot;
+    reviews = models.Review.objects.filter(listing=listing, review_parent__isnull=True)
+    rate1 = reviews.filter(rate=1).count()
+    rate2 = reviews.filter(rate=2).count()
+    rate3 = reviews.filter(rate=3).count()
+    rate4 = reviews.filter(rate=4).count()
+    rate5 = reviews.filter(rate=5).count()
+    total_votes = reviews.count()
+    total_reviews = total_votes - reviews.filter(text=None).count()
+
+    review_responses = models.Review.objects.filter(listing=listing, review_parent__isnull=False)
+    total_review_responses = review_responses.count()
+
+    # calculate weighted average
+    if total_votes == 0:
+        avg_rate = 0
+    else:
+        avg_rate = (5 * rate5 + 4 * rate4 + 3 * rate3 + 2 * rate2 + rate1) / total_votes
+        avg_rate = float('{0:.1f}'.format(avg_rate))
+
+    # update listing
+    listing.total_rate1 = rate1
+    listing.total_rate2 = rate2
+    listing.total_rate3 = rate3
+    listing.total_rate4 = rate4
+    listing.total_rate5 = rate5
+    listing.total_votes = total_votes
+    listing.total_reviews = total_reviews
+    listing.total_review_responses = total_review_responses
+    listing.avg_rate = avg_rate
+    listing.edited_date = utils.get_now_utc()
+    listing.save()
+    return listing
+</code></pre>
+
+<p>Code for benchmark (running user <code>make shell</code>)    </p>
+<pre><code>import time
+
+def show_db_calls():
+    db_connection = transaction.get_connection()
+    number_of_calls = len(db_connection.queries)
+    db_connection.queries_log.clear()
+    return number_of_calls
+
+
+show_db_calls()
+
+start_time = int(round(time.time() * 1000))
+
+
+from amlcenter.api.listing.model_access import _update_rating
+l = Listing.objects.all()
+[_update_rating('bigbrother', la) for la in l]
+
+print(int(round(time.time() * 1000)) - start_time)
+print(show_db_calls())  # Not working
+print('')
+
+# 1434 Comment
+# 3492 with counts()
+
+</code></pre>
+
+<p><strong><code>_update_rating new code</code> function results</strong>   </p>
+<pre><code>from django.db.models.expressions import RawSQL
+l=Listing.objects.get(id=2);
+Review.objects.filter(listing=l).values('rate').annotate(review_parent_isnull=RawSQL('&quot;review_parent_id&quot; is %s ', (None,)), rate_count=Count('rate'))
+
+
+SQLITE3:
+&lt;QuerySet [{'rate_count': 1, 'rate': 1, 'review_parent_isnull': 0},
+    {'rate_count': 1, 'rate': 1, 'review_parent_isnull': 1},
+    {'rate_count': 1, 'rate': 3, 'review_parent_isnull': 1},
+    {'rate_count': 1, 'rate': 4, 'review_parent_isnull': 1},
+    {'rate_count': 1, 'rate': 5, 'review_parent_isnull': 1}]&gt;
+
+Postgresql
+&lt;QuerySet [{'rate': 3, 'rate_count': 1, 'review_parent_isnull': True},
+           {'rate': 4, 'rate_count': 1, 'review_parent_isnull': True},
+           {'rate': 1, 'rate_count': 1, 'review_parent_isnull': False},
+           {'rate': 5, 'rate_count': 1, 'review_parent_isnull': True},
+           {'rate': 1, 'rate_count': 1, 'review_parent_isnull': True}]&gt;
+
+</code></pre>
+
+<p>SELECT "amlcenter_review"."rate",
+COUNT("amlcenter_review"."rate") AS "rate_count",
+("review_parent_id" is NULL ) AS "review_parent_isnull"
+FROM "amlcenter_review"
+WHERE "amlcenter_review"."listing_id" = 2
+GROUP BY "amlcenter_review"."rate", ("review_parent_id" is NULL )
+```</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../developer/" class="btn btn-neutral float-right" title="Developer">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../ascii-entities/" class="btn btn-neutral" title="Ascii entities"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../ascii-entities/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../developer/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>

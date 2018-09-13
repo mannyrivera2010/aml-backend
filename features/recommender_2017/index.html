@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Recommender 2017 - aml-backend</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Recommender 2017";
+    var mkdocs_page_input_path = "features/recommender_2017.md";
+    var mkdocs_page_url = "/features/recommender_2017/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> aml-backend</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../ascii-entities/">Ascii entities</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../debugging/">Debugging</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../developer/">Developer</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../domain_knowledge/">Domain knowledge</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../jenkins/">Jenkins</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../requirements/">Requirements</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Features</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../elasticsearch_upgrade_2.x_6.x/">Elasticsearch upgrade 2.x 6.x</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../notification/">Notification</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Recommender 2017</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#business-objective">Business Objective</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#requirements">Requirements</a></li>
+        
+            <li><a class="toctree-l4" href="#researched-solutions">Researched Solutions</a></li>
+        
+            <li><a class="toctree-l4" href="#mock-up">Mock up</a></li>
+        
+            <li><a class="toctree-l4" href="#recommendation-engine-principles">Recommendation Engine Principles</a></li>
+        
+            <li><a class="toctree-l4" href="#approach">Approach</a></li>
+        
+            <li><a class="toctree-l4" href="#videos">Videos:</a></li>
+        
+            <li><a class="toctree-l4" href="#sites">Sites</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../shared_folders_2018/">Shared folders 2018</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../smart_search/">Smart search</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../wiki/">Wiki</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">aml-backend</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Features &raquo;</li>
+        
+      
+    
+    <li>Recommender 2017</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="business-objective">Business Objective</h1>
+<p>To recommend applications to users that they might find useful in their everyday objectives    </p>
+<p>Original Ticket: https://github.com/aml-development/aml-backend/issues/193</p>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>Hardware and software requirements should not add cost or dependencies</li>
+<li>Solution shall work in development and production environments</li>
+<li>Solution shall be a hybrid solution composed of content and user based recommendation</li>
+<li>Recommendation Results shall be returned in less than three second</li>
+<li>Recomputing the results will make sure requirement will be meet</li>
+</ul>
+<h2 id="researched-solutions">Researched Solutions</h2>
+<h3 id="dsstne">DSSTNE</h3>
+<p>Designed to create and run recommendation models using minimal input and output, but numerous connected layers in between.  Emphasizes on speed and scaling.</p>
+<p><strong>Pros</strong>  <br />
+<em> Faster than other deep learning libraries.
+</em> Able to solve recommendations problems in a fast manner.</p>
+<p><strong>Cons</strong>  <br />
+<em> Multiple dependencies need to be installed.
+</em> Team would need time to learn. (DEEP LEARNING CURVE)
+<em> DSSTNE relies on multiple GPU's to perform optimally, though we do not have the ability to use multiple GPU's.
+</em> Python support currently unavailable (but on the way).</p>
+<h3 id="mxnet">MXNET</h3>
+<p>MXNet is a deep learning framework designed for both efficiency and flexibility, allows you to define, train, and deploy deep neural networks on a wide array of devices, from cloud infrastructure to mobile devices.</p>
+<p><strong>Pros</strong>  <br />
+<em> Portable (works on all major os, and programming language, julia, python, scala, r)
+</em> Efficient (Takes less memory)
+* Scalable (Ability do work across many GPUs and Machines)</p>
+<p><strong>Cons</strong>  <br />
+<em> Learning Curve<br />
+</em> Need a lot of data (takes millions of records for learning
+* Requires a gpu</p>
+<h3 id="predictionio">PredictionIO</h3>
+<p>An open source machine learning framework for developers, and users.  Queries predictive results using RES API's.</p>
+<p><strong>Pros</strong>  <br />
+<em> Open Source
+</em> Has multiple Recommender templates available for use
+* Python support</p>
+<p><strong>Cons</strong>  <br />
+<em> All of the Recommender templates are done in Scala, which is not currently used by the team
+</em> Bundled with Elasticsearch</p>
+<h3 id="elasticsearch">Elasticsearch</h3>
+<p>Can be customize to use user inputs to determine recommendations based on previous searches.
+Choosing the wrong method can have disastrous consequences for the quality of recommendations.
+https://www.elastic.co/guide/en/elasticsearch/reference/2.4/search-aggregations-bucket-significantterms-aggregation.html</p>
+<p><strong>Pros</strong>  <br />
+<em> Use statistics without personalization with Elasticsearch Aggregations to create profiles
+</em> Collaborative Filtering – The theory of guessing interesting items from similar items or similar users
+<em> Customizable based on implementation techniques
+</em> There is a More Like This API which allows to get documents</p>
+<p><strong>Cons</strong>
+<em> Need to build The system
+</em> Higher possibility of error in implementation</p>
+<h3 id="neo4j">Neo4j</h3>
+<p>Uses real time results using a visual graph relation to create a recommendation.</p>
+<p><strong>Pros</strong>  <br />
+<em> Graph interface and can be visual and understandable
+</em> Analysis on nodes and lines</p>
+<p><strong>Cons</strong>
+<em> Needs to use a JVM Engine and is Java based.  So as Java versions change need to verify that it can work with the infrastructure.
+</em> Each engine is created to perform a recommendation
+<em> Data is represented in Graphs and how data is connected to each node to node.  They relationships are between the nodes not the data.
+</em> Might need to use GraphAware add-on
+* Queries might take some time to develop</p>
+<h3 id="crab">Crab</h3>
+<p>Recommender systems in Python, can construct a customized recommender system from a set of algorithms</p>
+<p><strong>Pros</strong>  <br />
+<em> Python
+</em> Recommender Algorithms: User-Based Filtering and Item-Based Filtering
+* License: Open source, commercially usable</p>
+<p><strong>Cons</strong>
+<em> Learning Curve
+</em> Single Machine Processing</p>
+<h2 id="mock-up">Mock up</h2>
+<p>Requirement came from https://github.com/aml-development/aml-documentation/wiki/Iteration-53#uiux</p>
+<h3 id="center-front-page">Center Front page</h3>
+<p><img alt="" src="https://raw.githubusercontent.com/aml-development/aml-documentation/master/mockups/marketplace/Center_Recommended.PNG" /></p>
+<h3 id="center-search-page">Center Search page</h3>
+<p><img alt="" src="https://raw.githubusercontent.com/aml-development/aml-documentation/master/mockups/marketplace/Center_smartsearch_recommendation.PNG" /></p>
+<h2 id="recommendation-engine-principles">Recommendation Engine Principles</h2>
+<p>http://people.cs.vt.edu/~ramakris/papers/receval.pdf  <br />
+"""
+- Recommendation is an indirect way of bringing people together. As we will
+  discuss recommendation algorithms, especially collaborative filtering, exploit connections
+  between users and artifacts.
+- Recommendation, as a process, should emphasize modeling connections
+  from people to artifacts, besides predicting ratings for artifacts. In many situations,
+  users would like to request recommendations purely based on local and global
+  constraints on the nature of the specific connections explored.
+- Recommendations should be explainable and believable.
+- Recommendations are not delivered in isolation, but in the context of an
+  implicit/explicit social network.
+"""</p>
+<h2 id="approach">Approach</h2>
+<h3 id="scheduled-offline-batch">Scheduled Offline Batch</h3>
+<ul>
+<li>Add Recommendation Model to models.py file (This model is used to store the results of the script/program that computes recommendations).</li>
+</ul>
+<pre><code class="python">class RecommendationsEntry(models.Model):
+    &quot;&quot;&quot;
+    A Listing that a user (Profile) has in their 'application library'/bookmarks
+    &quot;&quot;&quot;
+    target_profile = models.ForeignKey(
+        'Profile', related_name='recommendations_entries')
+    listing = models.ForeignKey(
+        'Listing', related_name='recommendations_entries')
+    score = models.CharField(max_length=255, blank=True, null=True)
+
+    def __str__(self):
+        return '{0!s}:{1!s}:{2!s}'.format(self.folder, self.owner.user.username,
+                             self.listing.title)
+
+    def __repr__(self):
+        return '{0!s}:{1!s}:{2!s}'.format(self.folder, self.owner.user.username,
+                             self.listing.title)
+
+    class Meta:
+        verbose_name_plural = &quot;recommendations entries&quot;
+</code></pre>
+
+<ul>
+<li>Add recommended listing to storefront endpoint (This endpoint is used to show the users the results of the computation of the recommendation script/program)</li>
+</ul>
+<pre><code class="diff">diff --git a/amlcenter/api/storefront/model_access.py b/amlcenter/api/storefront/model_access.py
+index 85418d1..277150b 100644
+--- a/amlcenter/api/storefront/model_access.py
++++ b/amlcenter/api/storefront/model_access.py
+@@ -21,8 +21,16 @@ def get_storefront(username):
+
+     NOTE: think about adding Bookmark status to this later on
+     &quot;&quot;&quot;
+-    user = models.Profile.objects.get(user__username=username)  # flake8: noqa TODO: Is Necessary? - Variable not being
++    profile = models.Profile.objects.get(user__username=username)  # flake8: noqa TODO: Is Necessary? - Variable not bei
+     try:
++        # get recommended listing for owner
++        recommended_listings = models.RecommendationsEntry.objects.filter(target_profile=profile,
++                                                                         listing__is_enabled=True,
++                                                                         approval_status=models.Listing.APPROVED
++                                                                         is_deleted=False).order_by('-score').values(
++                                                                             'listing')[:12]
++        # Ensure that the Listing are viewable by the current user
++
+         # get featured listings
+         featured_listings = models.Listing.objects.for_user(
+             username).filter(
+@@ -51,6 +59,7 @@ def get_storefront(username):
+         most_popular_listings = serializers.ListingSerializer.setup_eager_loading(most_popular_listings)
+
+         data = {
++            'recommended': recommended_listings,
+             'featured': featured_listings,
+             'recent': recent_listings,
+             'most_popular': most_popular_listings
+</code></pre>
+
+<ul>
+<li>Have a process compute the recommendations for each user and write the results in the <strong>RecommendationsEntry</strong> table (maybe have two tables - active , inactive)</li>
+<li>Write the script that computes recommendations, at the point connect to database, get datasets, run recommendation algorithm, and save results</li>
+<li>After the recommendations have been saved to the table, the users will see recommendations when they hit the storefront endpoint, they could also refresh the page in aml-center</li>
+</ul>
+<h3 id="content-based-search-information">Content based search information:</h3>
+<p><em>Pros</em>:
+<em> Need to find features to compare for all items
+</em> Does not need to know information on users'
+<em> Can apply various Similarity Algorithms
+</em> Ability to make recommendations to users with unique tastes or requirements
+<em> Can make recommendations as soon they become available
+</em> Can use search history to create recommendations</p>
+<p><em>Cons</em>:
+<em> Finding the correct features to recommend on are hard to find
+</em> Can possibly never recommend an item outside of their interests
+<em> Unable to exploit the quality of others users
+</em> Cold-start problem for new users</p>
+<h3 id="user-based-search-information">User based search information:</h3>
+<ul>
+<li>Item-Item vs. User-User filtering comparison *:</li>
+<li>Both methods should perform the same</li>
+<li>In practice, item-item performs better than user-user</li>
+<li>Reason for item-item being better is because:<ul>
+<li>Items are "simpler" than classifying Users</li>
+<li>Item Similarity is more meaningful than User Similarity which makes it more useful</li>
+</ul>
+</li>
+</ul>
+<h3 id="visualization">Visualization</h3>
+<p><img alt="image" src="https://cloud.githubusercontent.com/assets/1072762/17147155/826dfd2a-532f-11e6-81a0-029305817585.png" /></p>
+<h2 id="videos">Videos:</h2>
+<ul>
+<li>https://youtu.be/Eeg1DEeWUjA Content Based Recommendation and Collaborative Filtering Recommendation Systems Explained</li>
+</ul>
+<h2 id="sites">Sites</h2>
+<ul>
+<li>https://neo4j.com/developer/guide-build-a-recommendation-engine/</li>
+<li>http://datascience.stackexchange.com/questions/8705/collaborative-filtering-using-graph-and-machine-learning</li>
+<li>http://mikelam.azurewebsites.net/beer-recommendations-with-user-based-collaborative-filtering/</li>
+<li>http://docs.celeryproject.org/en/latest/userguide/periodic-tasks.html</li>
+<li>We could use celery for task scheduling and running the recommendation algorithm.</li>
+<li>https://realpython.com/blog/python/asynchronous-tasks-with-django-and-celery/  is a good starting guide</li>
+<li>http://opensourceconnections.com/blog/2016/06/06/recommender-systems-101-basket-analysis/ good general site for Basket Analysis technique</li>
+<li>http://opensourceconnections.com/blog/2016/09/09/better-recsys-elasticsearch/ How to build a good recommendation engine using Elasticsearch</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../shared_folders_2018/" class="btn btn-neutral float-right" title="Shared folders 2018">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../notification/" class="btn btn-neutral" title="Notification"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../notification/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../shared_folders_2018/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>

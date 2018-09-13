@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Jenkins - aml-backend</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Jenkins";
+    var mkdocs_page_input_path = "jenkins.md";
+    var mkdocs_page_url = "/jenkins/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> aml-backend</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../ascii-entities/">Ascii entities</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../debugging/">Debugging</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../developer/">Developer</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../domain_knowledge/">Domain knowledge</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Jenkins</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#jenkins">Jenkins</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#download-and-running-jenkins">Download and running Jenkins</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l2"><a href="#master-and-slave-jenkins">Master and Slave Jenkins</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#boxes">Boxes</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l2"><a href="#jenkins-jobs">Jenkins Jobs</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#setting-up-aml-folder-on-jenkins-ci">Setting up aml folder on Jenkins CI</a></li>
+        
+            <li><a class="toctree-l3" href="#defaults-for-all-jobs">Defaults for all jobs</a></li>
+        
+            <li><a class="toctree-l3" href="#setting-up-aml-center-on-jenkins-ci">Setting up aml-center on Jenkins CI</a></li>
+        
+            <li><a class="toctree-l3" href="#setting-up-aml-hud-on-jenkins-ci">Setting up aml-hud on Jenkins CI</a></li>
+        
+            <li><a class="toctree-l3" href="#setting-up-aml-webtop-on-jenkins-ci">Setting up aml-webtop on Jenkins CI</a></li>
+        
+            <li><a class="toctree-l3" href="#setting-up-aml-demo-on-jenkins-ci">Setting up aml-demo on Jenkins CI</a></li>
+        
+            <li><a class="toctree-l3" href="#setting-up-aml-iwc-on-jenkins-ci">Setting up aml-iwc on Jenkins CI</a></li>
+        
+            <li><a class="toctree-l3" href="#setting-up-aml-react-commons-on-jenkins-ci">Setting up aml-react-commons on Jenkins CI</a></li>
+        
+            <li><a class="toctree-l3" href="#setting-up-aml-security-on-jenkins-ci">Setting up aml-security on Jenkins CI</a></li>
+        
+            <li><a class="toctree-l3" href="#setting-up-aml-backend-on-jenkins-ci">Setting up aml-backend on Jenkins CI</a></li>
+        
+            <li><a class="toctree-l3" href="#setting-up-bundle-front-end-master-on-jenkins-ci">Setting up bundle-front-end-master on jenkins ci</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../requirements/">Requirements</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Features</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../features/elasticsearch_upgrade_2.x_6.x/">Elasticsearch upgrade 2.x 6.x</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../features/notification/">Notification</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../features/recommender_2017/">Recommender 2017</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../features/shared_folders_2018/">Shared folders 2018</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../features/smart_search/">Smart search</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../features/wiki/">Wiki</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">aml-backend</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Jenkins</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="jenkins">Jenkins</h2>
+<p>Jenkins is a Continuous Integration Software tool</p>
+<h3 id="download-and-running-jenkins">Download and running Jenkins</h3>
+<pre><code>wget http://mirrors.jenkins.io/war-stable/latest/jenkins.war
+java -jar jenkins.war --httpPort=8082
+</code></pre>
+
+<ul>
+<li>Browse to http://localhost:8080</li>
+<li>Follow instructions to install</li>
+</ul>
+<h2 id="master-and-slave-jenkins">Master and Slave Jenkins</h2>
+<p>(Jenkins Distributed Builds)[https://wiki.jenkins.io/display/JENKINS/Distributed+builds]
+(What-is-the-use-of-master-and-slave-in-Jenkins)[https://www.quora.com/What-is-the-use-of-master-and-slave-in-Jenkins]</p>
+<pre><code>+----------------+
+| Github Push    |
++-------+--------+
+        |
+        v
+   +---------+
+   | Jenkins |     +--------------+
+   | Master  |     | ci-release   |
+   |         |     | Deployment   |
+   +----+----+     |  Machine     |
+        |          |              |
+        |          +-+------------+
+        v            ^
++----------+-------+ |
+| Jenkins          | |   +--------------+
+| Slave            | |   | ci-lastest   |
+| Label:           | |   | Deployment   |
+|  ci-jenkins.proj | |   |  Machine     |
+|                  | |   |              |
++-------------+----+ |   +-----+--------+
+           |         |       ^
+           +---------+-------+
+</code></pre>
+
+<p>There are 4 boxes in the above CI Configuration.  <br />
+Note:  Jenkins slave is not necessary    </p>
+<h3 id="boxes">Boxes</h3>
+<ul>
+<li>Jenkins Master - Is the main Jenkins Instance<ul>
+<li>DNS: jenkins.domain.com</li>
+</ul>
+</li>
+<li>Jenkins Slave - It is the machine used to run all the build to deploy it to deployment machines<ul>
+<li>It will build any jobs with the label <code>proj</code></li>
+<li>Will be responsible of creating release archive(tar) file then use ssh publisher to deployment machine</li>
+<li>DNS: ci-jenkins.proj.domain.com</li>
+</ul>
+</li>
+<li>ci-latest - deployment of master branch<ul>
+<li>Will be responsible of using release archive(tar) with ansible to install software locally (will have sub build per repo)</li>
+<li>DNS: ci-latest.proj.domain.com</li>
+</ul>
+</li>
+<li>ci-release - deployment of latest release tag<ul>
+<li>DNS: ci-release.proj.domain.com</li>
+</ul>
+</li>
+</ul>
+<h2 id="jenkins-jobs">Jenkins Jobs</h2>
+<p>There will be 4 jobs per git repo (release and latest)</p>
+<p>Git Repos and Jobs names</p>
+<ul>
+<li>aml-center<ul>
+<li>center-latest-test</li>
+<li>center-latest-build</li>
+<li>center-release-test</li>
+<li>center-release-build</li>
+</ul>
+</li>
+<li>aml-backend<ul>
+<li>backend-latest-test</li>
+<li>backend-latest-build</li>
+<li>backend-release-test</li>
+<li>backend-release-build</li>
+</ul>
+</li>
+</ul>
+<p>etc....</p>
+<h3 id="setting-up-aml-folder-on-jenkins-ci">Setting up aml folder on Jenkins CI</h3>
+<ul>
+<li>Create a new folder called <code>aml</code></li>
+</ul>
+<h3 id="defaults-for-all-jobs">Defaults for all jobs</h3>
+<ul>
+<li>Under the General tab<ul>
+<li>Select <code>Discard Old Builds</code> with <code>Log Rotation</code> Strategy<ul>
+<li>Max # of builds to keep <code>2</code></li>
+</ul>
+</li>
+<li>Select <code>Throttle Concurrent Builds</code><ul>
+<li>Set <code>Maximum Total Concurrent Builds</code> to <code>1</code></li>
+<li>Set <code>Maximum Concurrent Builds Per Node</code> to <code>1</code></li>
+<li>Multi-Project Throttle Category [x] aml-build , [ ] aml-deploy</li>
+</ul>
+</li>
+<li>Select <code>Restrict where this project can be run</code><ul>
+<li>Label Expression: <code>ci-jenkins.proj.domain.com</code></li>
+</ul>
+</li>
+<li>Select <code>Github project</code>,<ul>
+<li>make <code>project_url</code> to <code>https://github.com/aml-development/{RepositoryName}/</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Under <code>Source Code Management</code>, Select Git<ul>
+<li>Repository URL: <code>https://github.com/aml-development/{RepositoryName}.git</code></li>
+<li>Branches to build: <code>*/master</code> , for release <code>*/tags/release/*</code></li>
+</ul>
+</li>
+<li>Under <code>Build Triggers</code> (Only for test jobs)<ul>
+<li>Select <code>GitHub hook trigger for GITScm polling</code></li>
+</ul>
+</li>
+<li>Under <code>Build Environment</code><ul>
+<li>Select <code>Delete workspace before build starts</code></li>
+<li>Select <code>Abort the build if it's stuck</code>, Time-out strategy: <code>Absolute</code>, Timeout minutes: <code>15</code></li>
+</ul>
+</li>
+<li>Under <code>Post-build Actions</code><ul>
+<li>Archive the archive<ul>
+<li>File to archive: <code>???</code></li>
+</ul>
+</li>
+<li>Send build artifacts over ssh<ul>
+<li>SSH Server Name: <code>ci-latest.proj.domain.com</code></li>
+<li>Exec command: <code>sudo /home/jenkins/aml_deploy.sh ${JOB_NAME} ${BUILD_NUMBER}</code></li>
+</ul>
+</li>
+<li>Delete workspace when build is done</li>
+</ul>
+</li>
+</ul>
+<h3 id="setting-up-aml-center-on-jenkins-ci">Setting up aml-center on Jenkins CI</h3>
+<ul>
+<li>Create a new <code>freestyle project</code> called <code>build-center-latest</code> and <code>build-center-release</code></li>
+<li>Under <code>Build</code><ul>
+<li>Execute Shell</li>
+</ul>
+</li>
+</ul>
+<pre><code>#!/usr/bin/env bash
+# use the develop branch of aml-react-commons
+# sed -i -e &quot;s/aml-react-commons#master/aml-react-commons#develop/g&quot; package.json
+# sed -i -e &quot;s/\/icons/\/icons#1fc7aee3a2812042c421baaab67abb2bd9606b0d/g&quot; package.json
+source /usr/local/node_versions/set_node_version.sh 5.3.0
+echo &quot;node version: &quot;
+node -v
+npm install
+npm run build
+npm run test
+npm run tarDistDate
+</code></pre>
+
+<ul>
+<li>Under <code>Build</code><ul>
+<li>Conditional Step (single), run <code>Text Finder</code><ul>
+<li>Select <code>Also search the console output</code>, Regular expression: <code>Cannot resolve module</code></li>
+<li>Execute Shell</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>#!/usr/bin/env bash
+echo &quot;detected build error. Failing build&quot;
+exit 1
+</code></pre>
+
+<ul>
+<li>Under <code>Post-build Actions</code><ul>
+<li><code>Archive the archive</code>,  File to archive: <code>center-*.tar.gz</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="setting-up-aml-hud-on-jenkins-ci">Setting up aml-hud on Jenkins CI</h3>
+<ul>
+<li>Create a new <code>freestyle project</code> called <code>build-hud-latest</code> and <code>build-hud-release</code></li>
+<li>Under <code>Build</code><ul>
+<li>Execute Shell</li>
+</ul>
+</li>
+</ul>
+<pre><code>#!/usr/bin/env bash
+source /usr/local/node_versions/set_node_version.sh 5.3.0
+npm install
+npm run install
+npm run build
+npm run tarDistVersion
+</code></pre>
+
+<ul>
+<li>Under <code>Build</code><ul>
+<li>Conditional Step (single), run <code>Text Finder</code><ul>
+<li>Select <code>Also search the console output</code>, Regular expression: <code>Cannot resolve module</code></li>
+<li>Execute Shell</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>#!/usr/bin/env bash
+echo &quot;detected build error. Failing build&quot;
+exit 1
+</code></pre>
+
+<ul>
+<li>Under <code>Post-build Actions</code><ul>
+<li><code>Archive the archive</code>,  File to archive: <code>hud-*.tar.gz</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="setting-up-aml-webtop-on-jenkins-ci">Setting up aml-webtop on Jenkins CI</h3>
+<ul>
+<li>Create a new <code>freestyle project</code> called <code>build-webtop-latest</code> and <code>build-webtop-release</code></li>
+<li>Under <code>Build</code><ul>
+<li>Execute Shell</li>
+</ul>
+</li>
+</ul>
+<pre><code># sed -i -e &quot;s/\/icons/\/icons#1fc7aee3a2812042c421baaab67abb2bd9606b0d/g&quot; bower.json
+source /usr/local/node_versions/set_node_version.sh 5.3.0
+npm install
+npm run bower
+npm run build
+npm run compile
+npm run tarDevDate
+npm run tarProdDate
+</code></pre>
+
+<ul>
+<li>Under <code>Post-build Actions</code><ul>
+<li><code>Archive the archive</code>,  File to archive: <code>webtop-*.tar.gz</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="setting-up-aml-demo-on-jenkins-ci">Setting up aml-demo on Jenkins CI</h3>
+<ul>
+<li>Create a new <code>freestyle project</code> called <code>build-demo-latest</code> and <code>build-demo-release</code></li>
+<li>Under <code>Build</code><ul>
+<li>Execute Shell</li>
+</ul>
+</li>
+</ul>
+<pre><code>#!/usr/bin/env bash
+source /usr/local/node_versions/set_node_version.sh 0.12.7
+npm install
+bower install
+bower update
+npm run tarDate
+</code></pre>
+
+<ul>
+<li>Under <code>Post-build Actions</code><ul>
+<li><code>Archive the archive</code>,  File to archive: <code>demo-apps-*.tar.gz</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="setting-up-aml-iwc-on-jenkins-ci">Setting up aml-iwc on Jenkins CI</h3>
+<ul>
+<li>Create a new <code>freestyle project</code> called <code>iwc-latest-build</code> and <code>iwc-release-build</code></li>
+<li>Under <code>Build</code><ul>
+<li>Execute Shell</li>
+</ul>
+</li>
+</ul>
+<pre><code>#!/usr/bin/env bash
+source /usr/local/node_versions/set_node_version.sh 0.12.7
+npm install
+npm run bower
+npm run build
+npm run tarDate
+</code></pre>
+
+<ul>
+<li>Under <code>Post-build Actions</code><ul>
+<li><code>Archive the archive</code>,  File to archive: <code>iwc-*.tar.gz</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="setting-up-aml-react-commons-on-jenkins-ci">Setting up aml-react-commons on Jenkins CI</h3>
+<ul>
+<li>Create a new <code>freestyle project</code> called <code>detect-aml-react-commons-latest</code> and <code>detect-aml-react-commons-release</code></li>
+<li>Under <code>Build</code><ul>
+<li>Execute Shell</li>
+</ul>
+</li>
+</ul>
+<pre><code>#!/usr/bin/env bash
+source /usr/local/node_versions/set_node_version.sh 5.3.0
+echo &quot;node version: &quot;
+node -v
+npm install
+npm run test
+</code></pre>
+
+<ul>
+<li>Under <code>Post-build Actions</code><ul>
+<li><code>Build other projects</code><ul>
+<li>Projects to build: <code>build-center-release,build-hud-release</code></li>
+<li>Trigger only if build is stable</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="setting-up-aml-security-on-jenkins-ci">Setting up aml-security on Jenkins CI</h3>
+<ul>
+<li>Create a new <code>freestyle project</code> called <code>AML-Security-Plugin</code></li>
+<li>Under <code>Build</code><ul>
+<li>Maven Version <code>Maven 3.0.5</code></li>
+<li>Root Pom <code>Root Pom</code></li>
+<li>Goals and options <code>package</code></li>
+</ul>
+</li>
+<li>
+<p>Post Steps: Run regardless of build results</p>
+</li>
+<li>
+<p>Under <code>Post-build Actions</code></p>
+<ul>
+<li><code>Archive the archive</code>,  File to archive: <code>target\*.jar</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="setting-up-aml-backend-on-jenkins-ci">Setting up aml-backend on Jenkins CI</h3>
+<h4 id="build-jobs">Build jobs</h4>
+<ul>
+<li>Create a new <code>freestyle project</code> called <code>backend-latest-build</code> and <code>backend-release-build</code></li>
+<li>Under <code>Build</code><ul>
+<li>Execute Shell</li>
+</ul>
+</li>
+</ul>
+<pre><code>sh jenkins/build.sh
+</code></pre>
+
+<ul>
+<li>Under <code>Post-build Actions</code><ul>
+<li><code>Archive the archive</code>,  File to archive: <code>backend*.tar.gz</code></li>
+<li>Send build artifacts over ssh<ul>
+<li>SSH Server Name: <code>ci-latest.proj.domain.com</code></li>
+<li>Exec command: <code>sudo /home/jenkins/aml_deploy.sh ${JOB_NAME} ${BUILD_NUMBER} --es_enabled=True</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="test-jobs">Test jobs</h4>
+<ul>
+<li>Create a new <code>freestyle project</code> called <code>backend-latest-test</code> and <code>backend-release-test</code></li>
+<li>Under <code>Build</code><ul>
+<li>Execute Shell</li>
+</ul>
+</li>
+</ul>
+<pre><code>sh jenkins/test.sh
+</code></pre>
+
+<ul>
+<li>Under <code>Post-build Actions</code><ul>
+<li><code>Archive the archive</code>,  File to archive: <code>aml.log</code></li>
+<li><code>Build Other Projects</code>=<code>build-backend-latest</code>, Trigger only if build is stable</li>
+<li><code>Publish HTML Report</code><ul>
+<li><code>HTML directory to archive</code>: cover</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="setting-up-bundle-front-end-master-on-jenkins-ci">Setting up <code>bundle-front-end-master</code> on jenkins ci</h3>
+<ul>
+<li>Project Name <code>bundle-front-end-master</code>    </li>
+<li>Description</li>
+</ul>
+<pre><code>Creates a bundle with all the current Front End components:    
+* HUD
+* Center
+* IWC
+* WebTop
+</code></pre>
+
+<ul>
+<li>Source Code Management: None</li>
+<li>Build Triggers<ul>
+<li>Build after other projects are built:<ul>
+<li>build-center-release,build-hud-release,build-iwc-release,build-webtop-release    </li>
+<li>Trigger only if build is stable</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Build<ul>
+<li>Copy Artifacts from another projects<ul>
+<li>Project Name <code>build-webtop-release</code></li>
+<li>Which Build `Lastest Successful build (Stable build only)``</li>
+<li>Artifacts to copy <code>webtop*prod*.tar.gz</code></li>
+<li>Target directory <code>$WORKSPACE/staging</code></li>
+<li>[x] Fingerprint Artifacts</li>
+</ul>
+</li>
+<li>Copy Artifacts from another projects<ul>
+<li>Project Name <code>build-center-release</code></li>
+<li>Which Build `Lastest Successful build (Stable build only)``</li>
+<li>Artifacts to copy <code>center*prod*.tar.gz</code></li>
+<li>Target directory <code>$WORKSPACE/staging</code></li>
+<li>[x] Fingerprint Artifacts</li>
+</ul>
+</li>
+<li>Copy Artifacts from another projects<ul>
+<li>Project Name <code>build-hud-release</code></li>
+<li>Which Build `Lastest Successful build (Stable build only)``</li>
+<li>Artifacts to copy <code>hud*prod*.tar.gz</code></li>
+<li>Target directory <code>$WORKSPACE/staging</code></li>
+<li>[x] Fingerprint Artifacts</li>
+</ul>
+</li>
+<li>Copy Artifacts from another projects<ul>
+<li>Project Name <code>build-iwc-release</code></li>
+<li>Which Build `Lastest Successful build (Stable build only)``</li>
+<li>Artifacts to copy <code>iwc*prod*.tar.gz</code></li>
+<li>Target directory <code>$WORKSPACE/staging</code></li>
+<li>[x] Fingerprint Artifacts</li>
+</ul>
+</li>
+<li>Execute Shell</li>
+</ul>
+</li>
+</ul>
+<pre><code>#!/bin/sh
+mkdir -p $WORKSPACE/target
+cd $WORKSPACE/staging &amp;&amp; tar -zcf $WORKSPACE/target/front-end-bundle-current.tar.gz *.tar.gz
+</code></pre>
+
+<ul>
+<li>Post-build Actions<ul>
+<li>Archive the Artifacts<ul>
+<li>Files to Archive <code>target/*.tar.gz</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../requirements/" class="btn btn-neutral float-right" title="Requirements">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../domain_knowledge/" class="btn btn-neutral" title="Domain knowledge"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../domain_knowledge/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../requirements/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>

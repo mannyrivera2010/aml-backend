@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Notification - aml-backend</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Notification";
+    var mkdocs_page_input_path = "features/notification.md";
+    var mkdocs_page_url = "/features/notification/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> aml-backend</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../ascii-entities/">Ascii entities</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../debugging/">Debugging</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../developer/">Developer</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../domain_knowledge/">Domain knowledge</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../jenkins/">Jenkins</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../requirements/">Requirements</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Features</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../elasticsearch_upgrade_2.x_6.x/">Elasticsearch upgrade 2.x 6.x</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Notification</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#purpose">Purpose</a></li>
+    
+
+    <li class="toctree-l3"><a href="#requirements">Requirements</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#notification-types">Notification types</a></li>
+        
+            <li><a class="toctree-l4" href="#receiving-notifications">Receiving Notifications</a></li>
+        
+            <li><a class="toctree-l4" href="#sending-notifications">Sending Notifications</a></li>
+        
+            <li><a class="toctree-l4" href="#authorization">Authorization</a></li>
+        
+            <li><a class="toctree-l4" href="#protocol">Protocol</a></li>
+        
+            <li><a class="toctree-l4" href="#sorting-notification">Sorting Notification</a></li>
+        
+            <li><a class="toctree-l4" href="#2017-redesign">2017 Redesign</a></li>
+        
+            <li><a class="toctree-l4" href="#research">Research</a></li>
+        
+            <li><a class="toctree-l4" href="#user-stories">User-Stories</a></li>
+        
+            <li><a class="toctree-l4" href="#software-code">Software Code</a></li>
+        
+            <li><a class="toctree-l4" href="#questions-past">Questions (past)</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../recommender_2017/">Recommender 2017</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../shared_folders_2018/">Shared folders 2018</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../smart_search/">Smart search</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../wiki/">Wiki</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">aml-backend</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Features &raquo;</li>
+        
+      
+    
+    <li>Notification</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="purpose">Purpose</h1>
+<p>Notifications are system-provided messages that deploy to each relevant individual user. The intent is for Notifications to be available to be sent from the system, from any individual organization, or from an application.</p>
+<h1 id="requirements">Requirements</h1>
+<p>Existing Issues in github:  https://github.com/aml-development/aml-backend/issues?utf8=%E2%9C%93&amp;q=is%3Aissue%20notification</p>
+<h2 id="notification-types">Notification types</h2>
+<ul>
+<li>User Triggered  </li>
+<li>System-wide</li>
+<li>Agency-wide</li>
+<li>Listing</li>
+<li>Peer-to-peer bookmark</li>
+<li>System Triggered</li>
+<li>deletion management (Agency-wide Org Steward) <strong>Proposed</strong></li>
+<li>tags/categories subscription <strong>Proposed</strong>  </li>
+</ul>
+<h3 id="permissions">Permissions</h3>
+<p>APPS_MALL_STEWARD
+<em> add_system_notification
+</em> change_system_notification
+<em> delete_system_notification
+</em> add_agency_notification
+<em> change_agency_notification
+</em> delete_agency_notification
+<em> add_listing_notification
+</em> change_listing_notification
+<em> delete_listing_notification
+</em> add_peer_notification
+<em> change_peer_notification
+</em> delete_peer_notification
+<em> add_peer_bookmark_notification
+</em> change_peer_bookmark_notification
+* delete_peer_bookmark_notification</p>
+<p>ORG_STEWARD
+<em> add_system_notification
+</em> change_system_notification
+<em> delete_system_notification
+</em> add_agency_notification
+<em> change_agency_notification
+</em> delete_agency_notification
+<em> add_listing_notification
+</em> change_listing_notification
+<em> delete_listing_notification
+</em> add_peer_notification
+<em> change_peer_notification
+</em> delete_peer_notification
+<em> add_peer_bookmark_notification
+</em> change_peer_bookmark_notification
+* delete_peer_bookmark_notification</p>
+<p>USER
+<em> add_listing_notification
+</em> change_listing_notification
+<em> delete_listing_notification
+</em> add_peer_notification
+<em> change_peer_notification
+</em> delete_peer_notification
+<em> add_peer_bookmark_notification
+</em> change_peer_bookmark_notification
+* delete_peer_bookmark_notification</p>
+<h3 id="rules">Rules:</h3>
+<ul>
+<li>Only APPS_MALL_STEWARD can create system-wide notifications</li>
+<li>PermissionDenied('Only app mall stewards can create system notifications')</li>
+<li>Only ORG_STEWARD can create agency-wide notifications</li>
+<li>PermissionDenied('Only org stewards can create agency notifications')</li>
+<li>Only Listing Owner can create Listing notifications</li>
+<li>PermissionDenied('Cannot create a notification for a listing you do not own')</li>
+</ul>
+<h2 id="receiving-notifications">Receiving Notifications</h2>
+<ul>
+<li>For the system messages, every user should receive the notification.</li>
+<li>For the organizations' messages (agency-wide), every user associated with the organization should receive the notification.</li>
+<li>For the applications/listings, every user who has bookmarked the listing should receive the notification.</li>
+</ul>
+<h2 id="sending-notifications">Sending Notifications</h2>
+<ul>
+<li>Owners of listings will be able to send messages only from their listing. These messages will need to be approved by a Steward of the listing's associated organization and then by a Marketplace Steward.</li>
+<li>Organization Stewards will be able to send messages from their organization or any listing associated with their organization.</li>
+<li>Marketplace Stewards will be able to send messages from the system, an organization, or any listing. These messages will not need to be approved by any other Steward.</li>
+</ul>
+<h3 id="system-wide-request">System-Wide Request</h3>
+<pre><code>POST /api/notification/ HTTP/1.1
+Request Payload:
+{
+  &quot;expires_date&quot;: &quot;2016-06-17T06:30:00.000Z&quot;,
+  &quot;message&quot;: &quot;Test&quot;
+}
+</code></pre>
+
+<h3 id="agency-wide">Agency-wide</h3>
+<pre><code>POST /api/notification/ HTTP/1.1
+Request Payload:
+{
+  &quot;expires_date&quot;: &quot;2016-06-17T06:30:00.000Z&quot;,
+  &quot;message&quot;: &quot;Test&quot;,
+  &quot;agency&quot;: {
+    &quot;id&quot;: 5
+ }
+}
+</code></pre>
+
+<h3 id="listing-wide">Listing-wide</h3>
+<pre><code>POST /api/notification/ HTTP/1.1
+Request Payload:
+{
+  &quot;expires_date&quot;: &quot;2016-06-17T06:30:00.000Z&quot;,
+  &quot;message&quot;: &quot;Test&quot;,
+  &quot;listing&quot;: {
+    &quot;id&quot;: 5
+ }
+}
+</code></pre>
+
+<h3 id="peer-to-peer-bookmark">Peer to Peer Bookmark</h3>
+<pre><code>POST /api/notification/ HTTP/1.1
+Request Payload:
+{
+  &quot;expires_date&quot;: &quot;2016-06-17T06:30:00.000Z&quot;,
+  &quot;message&quot;: &quot;Test&quot;,
+  &quot;peer&quot;: {
+    &quot;user&quot;: {
+      &quot;username&quot;: &quot;bigbrother&quot;
+    },
+    &quot;folder_name&quot;: &quot;folder1&quot;
+  }
+}
+</code></pre>
+
+<h2 id="authorization">Authorization</h2>
+<ul>
+<li>Any User can view a System-wide notification from the system.</li>
+<li>Only user authorized should be able to delete the notifications.</li>
+</ul>
+<p><strong>Related Issues:</strong>
+https://github.com/aml-development/aml-backend/issues/122</p>
+<h2 id="protocol">Protocol</h2>
+<ul>
+<li>Shall be possible to have notifications in JSON Formats and over HTTP/HTTPS transports</li>
+</ul>
+<h2 id="sorting-notification">Sorting Notification</h2>
+<p><strong>Usage:</strong>
+Default response is Descending    </p>
+<pre><code>GET /api/self/notification/?ordering=-created_date   # Descending
+or
+GET /api/self/notification/?ordering=created_date  # Ascending
+</code></pre>
+
+<p>https://github.com/aml-development/aml-backend/issues/160</p>
+<h2 id="2017-redesign">2017 Redesign</h2>
+<h3 id="goal">Goal</h3>
+<p>Propose redesign of back-end architecture to inbox style (beneficial to use a task manager like celery)   </p>
+<h3 id="backlog">Backlog</h3>
+<p>"As developer, propose redesign of back-end architecture to create a solution that provides capabilities to manage current, proposed and future notification requirements."    </p>
+<p><strong>Email</strong>  <br />
+The notification system shall integrate with email system</p>
+<h3 id="proposed-solution">Proposed Solution</h3>
+<ul>
+<li>Mailbox style, Every user will have an inbox.   </li>
+<li>When a system wide notification occurs, it will make a list of all users in the system and put a message in the 'inbox'  of each user</li>
+<li>When a listing notification occurs, it will make a list of all users that has a listing bookmark and put a message in the 'inbox'  of each user</li>
+<li>When an agency-wide notification occurs, it will make a list of all user in that agency and put a message in the 'inbox' of each user</li>
+<li>When a peer-to-peer bookmark notification occurs</li>
+<li>https://github.com/aml-development/aml-backend/issues/129</li>
+<li>Pub/Sub Events system for system actions events (Category Notification)</li>
+</ul>
+<h2 id="research">Research</h2>
+<ul>
+<li>https://github.com/mcomp2010-forks/Stream-Framework    </li>
+<li>http://highscalability.com/blog/2013/7/8/the-architecture-twitter-uses-to-deal-with-150m-active-users.html</li>
+<li>http://www.slideshare.net/rabbitmq/why-databases-suck-for-messaging</li>
+</ul>
+<h3 id="steps">Steps</h3>
+<ul>
+<li>Create new Model for redesigned Notification</li>
+<li>Iterate thorough all the current Notifications and put in new Notification Model</li>
+<li>Refactor All the Notification methods to use new Notification Model</li>
+</ul>
+<h2 id="user-stories">User-Stories</h2>
+<h3 id="req-173">req-173</h3>
+<p><strong>Date Created:</strong> Dec 06, 2016  <br />
+<strong>Description</strong>  <br />
+As an admin I want notification if an owner has cancelled an app that was pending deletion   </p>
+<p><strong>Message Text:</strong>  {owner.username} cancelled {app.name} that was pending deletion</p>
+<h3 id="req-170">req-170</h3>
+<p><strong>Date Created:</strong> Dec 06, 2016  <br />
+<strong>Description</strong>  <br />
+As an Owner I want to receive notice of whether my deletion request has been approved or rejected  </p>
+<p><strong>Message Text:</strong>  {app.name} pending deletion was {approved||rejected}</p>
+<h3 id="req-376">req-376</h3>
+<p><strong>Date Created:</strong> March 16, 2017  <br />
+<strong>Description</strong>  <br />
+As a CS, I want to receive notification of Listings submitted for my organization</p>
+<p><strong>Message Text:</strong>  {owner.username} submitted a application listing for submission - {listing.title}</p>
+<h3 id="req-377">req-377</h3>
+<p><strong>Date Created:</strong> March 16, 2017  <br />
+<strong>Description</strong>  <br />
+As an owner and CS, I want to receive notification of user rating and reviews</p>
+<p><strong>Message Text:</strong>  {listing.title} had a review</p>
+<p><strong>Pseudocode Steps</strong>  <br />
+<em> When model_access.create_listing_review executes publish 'listing_reviewed' event with [listing, rate]. <br />
+</em> The observer of 'review_listing' event will create a Listing Notification targeted to Listings Owners and Listings Agency Org Stewards</p>
+<h3 id="req-379">req-379</h3>
+<p><strong>Date Created:</strong> March 17, 2017  <br />
+<strong>Description</strong>  <br />
+As a user, I want to receive notification when Listings I've bookmarked are changed to private</p>
+<p><strong>Message Text:</strong>  {listing.title} was changed to be private</p>
+<p><strong>Pseudocode Steps</strong>  <br />
+<em> When ListingSerializer.update function execute and if listing.is_private changes publish 'listing_is_private_changed' event with [listing, is_private].
+</em> The observer of 'listing_is_private_changed' event will create a Listing Notification targeted to users that bookmarked listing</p>
+<h3 id="req-383">req-383</h3>
+<p><strong>Date Created:</strong> March 17, 2017  <br />
+<strong>Description</strong>  <br />
+As a owner, I want to be able to notify users when my Listing is changed from public to private and vice-versa</p>
+<p><strong>Message Text:</strong>  {listing.title} was changed to be {private||public}</p>
+<p><strong>Related to</strong>  req-379</p>
+<h3 id="req-378">req-378</h3>
+<p><strong>Date Created:</strong> March 17, 2017  <br />
+<strong>Description</strong>  <br />
+As a user, I want to receive notification about changes on Listings I've bookmarked</p>
+<p><strong>Question:</strong>  <br />
+What does changes mean</p>
+<h3 id="req-380">req-380</h3>
+<p><strong>Date Created:</strong> March 17, 2017  <br />
+<strong>Description</strong>  <br />
+As a user, I want to receive notification when a Listing is added to a subscribed category or tag  </p>
+<h3 id="req-381">req-381</h3>
+<p><strong>Date Created:</strong> March 17, 2017  <br />
+<strong>Description</strong>  <br />
+As a user, I want to receive notification when someone shares a folder with me</p>
+<h3 id="req-382">req-382</h3>
+<p><strong>Date Created:</strong> March 17, 2017  <br />
+<strong>Description</strong>  <br />
+As a user, owner or CS, I want the ability to configure notification settings/preferences</p>
+<h3 id="req-384">req-384</h3>
+<p><strong>Date Created:</strong> March 17, 2017  <br />
+<strong>Description</strong>  <br />
+As a owner, I want myself and CS to be notified when one of the Listing owner’s certificate expires</p>
+<h2 id="software-code">Software Code</h2>
+<h3 id="current-endpointsviews">Current Endpoints/Views:</h3>
+<ul>
+<li>/api/self/notification/</li>
+<li>UserNotificationViewSet</li>
+<li>/api/notifications/</li>
+<li>NotificationViewSet</li>
+<li>/api/notifications/pending/</li>
+<li>PendingNotificationView</li>
+<li>/api/notifications/expired/</li>
+<li>ExpiredNotificationView</li>
+</ul>
+<h3 id="methods">Methods</h3>
+<ul>
+<li>Get all notifications</li>
+<li>Get all pending notifications</li>
+<li>Get all expired notifications</li>
+<li>Create a Notification</li>
+<li>Delete/Dismiss a notifications</li>
+<li>Get notifications for a user</li>
+<li>Sort by date</li>
+<li>Update notifications Expired Date</li>
+<li>Email Batch</li>
+<li>When email_batch command occurs, it will go to every users' 'mailbox' to check if email_status on the notification is false, do the count, make value true, and email user the new notification count and telling them to login.</li>
+</ul>
+<h3 id="model">Model</h3>
+<p><strong>Current Model</strong></p>
+<pre><code class="python">class Notification(models.Model):
+    &quot;&quot;&quot;
+    Setter for peer variable
+    {
+        'user': {
+        'username': str
+        },
+        '_bookmark_listing_ids': list[int],
+        'folder_name': str
+    }
+    &quot;&quot;&quot;
+    created_date = models.DateTimeField(default=utils.get_now_utc)
+    message = models.CharField(max_length=4096)
+    expires_date = models.DateTimeField()
+    author = models.ForeignKey(Profile, related_name='authored_notifications')
+    dismissed_by = models.ManyToManyField(
+        'Profile',
+        related_name='dismissed_notifications',
+        db_table='notification_profile'
+    )
+    listing = models.ForeignKey(Listing, related_name='notifications',
+                                null=True, blank=True)
+    agency = models.ForeignKey(Agency, related_name='agency_notifications',
+                               null=True, blank=True)
+    _peer = models.CharField(max_length=4096, null=True, blank=True, db_column='peer')
+
+    def notification_type(self):
+        &quot;&quot;&quot;
+        Dynamically figure out Notification Type
+
+        Types:
+            SYSTEM - System-wide Notifications
+            AGENCY - Agency-wide Notifications
+            AGENCY.BOOKMARK - Agency-wide Bookmark Notifications # Not requirement (erivera 20160621)
+            LISTING - Listing Notifications
+            PEER - Peer to Peer Notifications
+            PEER.BOOKMARK - Peer to Peer Bookmark Notifications
+        &quot;&quot;&quot;
+</code></pre>
+
+<p><strong>Redesign Model</strong></p>
+<pre><code class="python">
+class NotificationV2(models.Model):
+    # Mailbox Profile ID
+    profile_target_id = models.ForeignKey(Profile, related_name='mailbox_notifications')
+
+    # It is a unique id for notifications that allow to correlate between different 'mailboxes'
+    # Example) For deleting system-wide notifications,
+    #    for every 'mailbox' delete the notification with notification_id
+    notification_id = models.UUIDField(default=uuid.uuid4, editable=False, db_index=True)
+
+    created_date = models.DateTimeField(default=utils.get_now_utc)
+    expires_date = models.DateTimeField()
+
+    # Author of Notification
+    author = models.ForeignKey(Profile, related_name='authored_notificationsv2')
+    message = models.CharField(max_length=4096)
+
+    # Notification Type
+    SYSTEM = 'system'  # System-wide Notifications
+    AGENCY = 'agency'  #   Agency-wide Notifications
+    AGENCY_BOOKMARK = 'agency_bookmark'  #  Agency-wide Bookmark Notifications # Not requirement (erivera 20160621)
+    LISTING = 'listing'  # Listing Notifications
+    PEER = 'peer'  # Peer to Peer Notifications
+    PEER_BOOKMARK = 'peer_bookmark'  # PEER.BOOKMARK - Peer to Peer Bookmark Notifications
+
+    NOTIFICATION_TYPE_CHOICES = (
+        (SYSTEM, 'system'),
+        (AGENCY, 'agency'),
+        (AGENCY_BOOKMARK, 'agency_bookmark'),
+        (LISTING, 'listing'),
+        (PEER, 'peer'),
+        (PEER_BOOKMARK, 'peer_bookmark'),
+    )
+
+    notification_type = models.CharField(max_length=24, choices=NOTIFICATION_TYPE_CHOICES, db_index=True)
+
+    # Depending on notification_type, it could be listing_id/agency_id/profile_user_id/category_id/tag_id
+    entity_id  = models.IntegerField(default=0, null=True, blank=True)
+
+    # If it has been emailed. then make value true
+    email_status = models.BooleanField(default=False)
+
+    # Field use to store extra data.
+    # For PEER.BOOKMARK Notifications this field will be use to store FolderName and Listing Ids
+    _metadata = models.CharField(max_length=4096, null=True, blank=True, db_column='metadata')
+
+    # User Target
+    ALL = 'all'  # All users
+    STEWARDS = 'stewards'
+    APP_STEWARD = 'app_steward'
+    ORG_STEWARD = 'org_steward'
+    USER = 'user'
+
+    TARGET_USER_CHOICES = (
+        (ALL, 'all'),
+        (STEWARDS, 'stewards'),
+        (APP_STEWARD, 'app_steward'),
+        (ORG_STEWARD, 'org_steward'),
+        (USER, 'user'),
+    )
+    user_target = models.CharField(max_length=24, choices=TARGET_USER_CHOICES) # db_index=True)
+
+    @property
+    def metadata(self):
+        if self._metadata:
+            return json.loads(self._metadata)
+        else:
+            return None
+
+    @metadata.setter
+    def metadata(self, value):
+        &quot;&quot;&quot;
+        Setter for metadata variable
+        {
+            '_bookmark_listing_ids': list[int],
+            'folder_name': str
+        }
+
+        Args:
+            value (dict): dictionary
+        &quot;&quot;&quot;
+        if value:
+            assert isinstance(value, dict), 'Argument of wrong type is not a dict'
+            self._metadata = json.dumps(value)
+        else:
+            return None
+
+    def __repr__(self):
+        return '{0!s}: {1!s}'.format(self.author.user.username, self.message)
+
+    def __str__(self):
+        return '{0!s}: {1!s}'.format(self.author.user.username, self.message)
+</code></pre>
+
+<p>CQL (cassandra)</p>
+<pre><code class="cql">DROP KEYSPACE IF EXISTS notification;
+
+CREATE KEYSPACE IF NOT EXISTS notification
+    WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
+
+// Schema
+CREATE TABLE notification.messages (
+    // Mailbox Profile ID
+    profile_target_id int,
+
+    // It is a unique id for notifications that allow to correlate between different 'mailboxes'
+    notification_id  uuid,
+
+    // Author Profile username
+    author_username text,
+
+    // Type: SYSTEM, AGENCY, AGENCY_BOOKMARK, LISTING, PEER, PEER_BOOKMARK
+    notification_type text,
+
+    // Create Date
+    created_date  timestamp,
+
+    // Expires Date
+    expires_date timestamp,
+
+    // Message of Notification
+    message text,
+
+    // If it has been emailed. then make value true
+    email_status boolean,
+
+    // Field use to store extra data.
+    metadata map&lt;text, text&gt;,
+
+    // Group Target, Used for debugging
+    // All, Stewards, App Stewards, Org Stewards, User
+    role_target text,
+
+    primary key (profile_target_id , expires_date, created_date)
+)
+WITH CLUSTERING ORDER BY (expires_date DESC, created_date DESC);
+
+
+// Inserts
+// System-Wide Notification
+INSERT INTO notification.messages(
+        profile_target_id,
+        notification_id,
+        email_status,
+        created_date,
+        expires_date,
+        role_target,
+        message,
+        notification_type,
+        author_username,
+        metadata
+        )
+VALUES (2,
+        now(),
+        False,
+        toTimestamp(now()),
+        toTimestamp(now()),
+        'all',
+        'Sample Message',
+        'system',
+        'bigbrother',
+        {'test':'test'}
+);
+
+
+// Get all Notifications for user 2
+SELECT * FROM notification.messages WHERE profile_target_id = 2;
+
+SELECT count(*) FROM notification.messages WHERE profile_target_id = 2;
+
+
+</code></pre>
+
+<h3 id="model-access-signatures">Model Access Signatures:</h3>
+<p><strong>Get All Notifications</strong></p>
+<pre><code class="python">def get_all_notifications():
+    &quot;&quot;&quot;
+    Get all notifications (expired and un-expired notifications)
+    &quot;&quot;&quot;
+</code></pre>
+
+<p><strong>Create Notification</strong></p>
+<pre><code class="python">def create_notification(author_username, expires_date, message, listing=None, agency=None, peer=None):
+    &quot;&quot;&quot;
+    Args:
+        author_username (str): Username of author
+        expires_date (datetime.datetime): Expires Date (datetime.datetime(2016, 6, 24, 1, 0, tzinfo=&lt;UTC&gt;))
+        message (str): Message of notification
+        listing (models.Listing)-Optional: Listing
+        Agency (models.Agency)-Optional: Agency
+    &quot;&quot;&quot;
+</code></pre>
+
+<p><strong>Dismiss Notification</strong></p>
+<pre><code class="python">def dismiss_notification(notification_instance, username):
+    &quot;&quot;&quot;
+    Args:
+        notification_instance (models.Notification): notification_instance
+        username (string)
+    &quot;&quot;&quot;
+</code></pre>
+
+<p><strong>Update Notification</strong></p>
+<pre><code class="python">def update_notification(author_username, notification_instance, expires_date):
+    &quot;&quot;&quot;
+    Args:
+        notification_instance (models.Notification): notification_instance
+        author_username (str): Username of author
+    &quot;&quot;&quot;
+    notification_instance.expires_date = expires_date
+</code></pre>
+
+<p><strong>get_all_pending_notifications</strong></p>
+<pre><code class="python">def get_all_pending_notifications(for_user=False):
+    &quot;&quot;&quot;
+    Gets all system-wide pending notifications
+    &quot;&quot;&quot;
+</code></pre>
+
+<p><strong>get_all_expired_notifications</strong></p>
+<pre><code class="python">def get_all_expired_notifications():
+    &quot;&quot;&quot;
+    Get all expired notifications
+    &quot;&quot;&quot;
+</code></pre>
+
+<pre><code class="python">def get_notification_by_id(username, id, reraise=False):
+    &quot;&quot;&quot;
+    Get Notification by id
+    &quot;&quot;&quot;
+</code></pre>
+
+<pre><code class="python">def get_self_notifications(username):
+    &quot;&quot;&quot;
+    Get notifications for current user
+
+    User's Notifications are
+        * Notifications that have not yet expired (A)
+        * Notifications have not been dismissed by this user (B)
+        * Notifications that are regarding a listing in this user's library
+          if the notification is listing-specific
+        * Notification that are System-wide are included
+
+    Args:
+        username (str): current username to get notifications
+    &quot;&quot;&quot;
+    notifications = (unexpired_system_notifications | unexpired_agency_notifications | unexpired_peer_notifications |
+                     unexpired_listing_notifications).exclude(pk__in=dismissed_notifications)
+</code></pre>
+
+<h2 id="questions-past">Questions (past)</h2>
+<ul>
+<li>Will messages from organizations have to be approved by the Marketplace Steward?<ul>
+<li>Can Org. Stewards cancel their notifications without approval from the Marketplace Steward?</li>
+</ul>
+</li>
+<li>Will messages created by Org Stewards or MP Stewards for/from listings need to be approved in the typical fashion? (By Org Stewards and then by MP Stewards)</li>
+<li>What level of information about all the current notifications should Org Stewards have?<ul>
+<li>Should the get to see all the other orgs' notifications but not interact?</li>
+<li>Should they only get to see notifications from their own org(s) and the listings associated with their org?</li>
+<li>Should they get to see aml Platform notifications?</li>
+</ul>
+</li>
+<li>Can an owner cancel an approved notification?</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../recommender_2017/" class="btn btn-neutral float-right" title="Recommender 2017">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../elasticsearch_upgrade_2.x_6.x/" class="btn btn-neutral" title="Elasticsearch upgrade 2.x 6.x"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../elasticsearch_upgrade_2.x_6.x/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../recommender_2017/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>
