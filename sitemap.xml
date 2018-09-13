@@ -11,6 +11,14 @@
 
     
     <url>
+     <loc>/access_control/</loc>
+     <lastmod>2018-09-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
      <loc>/ascii-entities/</loc>
      <lastmod>2018-09-13</lastmod>
      <changefreq>daily</changefreq>

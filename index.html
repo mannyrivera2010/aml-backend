@@ -62,6 +62,8 @@
     
         <ul>
         
+            <li><a class="toctree-l3" href="#software-versions">Software Versions</a></li>
+        
             <li><a class="toctree-l3" href="#development-environment-preparation">Development environment preparation</a></li>
         
             <li><a class="toctree-l3" href="#building-and-running-the-aml-backend">Building and running the AML backend</a></li>
@@ -84,13 +86,15 @@
     <li class="toctree-l2"><a href="#releasing">Releasing</a></li>
     
 
-    <li class="toctree-l2"><a href="#controlling-access">Controlling Access</a></li>
-    
-
     <li class="toctree-l2"><a href="#sample-users-for-basicauth">Sample Users for BasicAuth</a></li>
     
 
     </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="access_control/">Access control</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -187,18 +191,14 @@
             <div class="section">
               
                 <h2 id="background">Background</h2>
-<p>Django-based backend API<br />
-<strong>aml-backend</strong> replaces <a href="https://github.com/aml-development/aml-rest">aml-rest</a></p>
-<p>Notable differences include:    </p>
-<ul>
-<li>Python vs. Java/Groovy</li>
-<li>Django, Django Rest Framework vs. Grails, JAX-RS</li>
-<li>Postgres vs. MySQL</li>
-</ul>
+<p>Django-based backend API  </p>
 <h2 id="3rd-party-services">3rd Party Services</h2>
 <p>Project relays on  <br />
 Travis-CI  <a href="https://travis-ci.org/aml-development/aml-backend"><img alt="Build Status" src="https://travis-ci.org/aml-development/aml-backend.svg?branch=master" /></a></p>
 <h2 id="getting-started">Getting Started</h2>
+<h3 id="software-versions">Software Versions</h3>
+<p><code>Elasticsearch</code> - 6.3.2
+<code>Python</code> - 3.4</p>
 <h3 id="development-environment-preparation">Development environment preparation</h3>
 <pre><code>cd ~
 mkdir git
@@ -219,24 +219,38 @@ make dev
 
 <h3 id="makefile">MakeFile</h3>
 <p>There is a MakeFile in the project to run repetitive commands    </p>
-<p><strong>Commands to setup server</strong>  <br />
-<code>make pyenv</code> - Create Python environment and install requirements  <br />
-<code>make dev run</code> - Setup up the Development environment and run server on a SQLite Database without Elasticsearch  <br />
-<code>make dev</code> - Setup up the development environment running on a SQLite Database without Elasticsearch  <br />
-<code>make dev_psql</code> - Setup up the development environment running on a Postgres Database without Elasticsearch  <br />
-<code>make dev_es</code> - Setup up the development environment running on a SQLite Database with Elasticsearch   <br />
-<code>make reindex_es</code> - Reindex the data into Elasticsearch    </p>
-<p><strong>Commands to run server</strong>  <br />
-<code>make run</code> - Run the server  <br />
-<code>make run_es</code> - Run the server with Elasticsearch  <br />
-<code>make rung</code> - Run Server with gunicorn with a worker per core  <br />
-<code>make rung_es</code> - Run Server with gunicorn with a worker per core  <br />
-<code>make test</code> - Run all test  <br />
-<code>make ptest</code> - Run all test in parallel (increase speed of unit tests)</p>
-<p><strong>Commands server</strong>  <br />
-<code>make codecheck</code> - Run pycodestyle python linter on the code  <br />
-<code>make autopep</code> - Run tool to fix python code  <br />
-<code>make upgrade_requirements</code> - Update project python dependencies    </p>
+<p><em>Flags</em>
+<code>use_psql</code>-Use Postgres Database
+<code>use_es</code>-Use elasticsearch Database
+<code>use_gunicorn</code>-Use gunicorn
+<code>clean</code>-Clean Directory
+<code>create_static</code>-Collect static files
+<code>test</code>-Run all tests
+<code>test_parallel</code>-Run all test in parallel (increase speed of unit tests)
+<code>test_soft</code>-Run all tests (without clean)
+<code>install_git_hooks</code>-Install Git Hooks
+<code>run</code>-Run the server locally
+<code>run_all</code>-Run server locally, celery_worker, Recommendations
+<code>celery_worker</code>-Run the celery worker
+<code>run_gunicorn_secure</code>-Run server using gunicorn on HTTPS (preq: clone dev-tools repo)
+<code>run_gunicorn_secure_ansible</code>-Run server using gunicorn on HTTPS (preq: clone aml-ansible repo)
+<code>codecheck</code>-Run pycodestyle python linter on the code
+<code>autopep</code>-Run tool to fix python code
+<code>autopepdiff</code>-Print out linter diff
+<code>reindex_es</code>-Reindex the data into Elasticsearch
+<code>recommend</code>-Run Recommendations algorthims
+<code>db_migrate</code>-Db migrate
+<code>dev</code>-Set up development server with sample data
+<code>email</code>-Send Notifications using email server
+<code>run_debug_email_server</code>-Run Debug Email Server
+<code>shell</code>-Launch python shell using sqlite
+<code>shell_psql</code>-Launch python shell using postgres
+<code>create_virtualenv</code>-Create Python Environment
+<code>pyenv</code>-Create Python Environment and install dependencies
+<code>pyenv_wheel</code>-Create Python Environment and install dependencies using wheelhouse</p>
+<p><em>Requirements</em>
+<code>upgrade_requirements</code>-upgrade requirements
+<code>freeze_requirements</code>-freeze requirements</p>
 <h3 id="postgres-setup">Postgres Setup</h3>
 <p>Command to install postgresql (on Debian-based OS)</p>
 <pre><code>sudo apt-get install postgresql postgresql-contrib
@@ -319,274 +333,6 @@ You can also use the officially supported Puppet module, Chef cookbook, or Ansib
 <h2 id="releasing">Releasing</h2>
 <p>Run <code>python release.py</code> to generate a tarball with Wheels for the application
 and all of its dependencies. See <code>release.py</code> for details</p>
-<h2 id="controlling-access">Controlling Access</h2>
-<p>Anonymous users have no access - all must have a valid username/password (dev)
-or valid certificate (production) to be granted any access</p>
-<p>A few endpoints only provide READ access:</p>
-<ul>
-<li>storefront</li>
-<li>metadata</li>
-</ul>
-<p>Several resources allow global READ access with WRITE access restricted to
-Apps Mall Stewards:</p>
-<ul>
-<li>access_control</li>
-<li>agency</li>
-<li>category</li>
-<li>contact_type</li>
-<li>listing_type</li>
-</ul>
-<p><strong>image</strong></p>
-<ul>
-<li>global READ of metadata, but access_control enforcement on the images
-themselves</li>
-<li>WRITE access allowed for all users, but the associated access_control level
-    cannot exceed that of the current user</li>
-</ul>
-<p><strong>intent</strong></p>
-<ul>
-<li>global READ and WRITE allowed, but associated intent.icon.access_control
-    cannot exceed that of the current user</li>
-</ul>
-<p><strong>library</strong></p>
-<ul>
-<li>READ access for ORG stewards and above</li>
-<li>no WRITE access</li>
-<li>READ and WRITE access to /self/library for the current user</li>
-</ul>
-<p><strong>notification</strong></p>
-<ul>
-<li>global READ access</li>
-<li>WRITE access restricted to Org Stewards and above, unless the notification
-    is associated with a Listing owned by this user</li>
-<li>READ and WRITE access to /self/notification for the current user</li>
-</ul>
-<p><strong>profile</strong></p>
-<ul>
-<li>READ access restrictpython manage.py runscript sample_dated to Org Stewards and above</li>
-<li>WRITE access restricted to the associated user (users cannot create, modify,
-    or delete users other than themselves)</li>
-<li>READ and WRITE access to /self/profile for the current user</li>
-</ul>
-<p><strong>listing</strong></p>
-<ul>
-<li>READ access restricted by agency (if listing is private) and by access_control
-    level</li>
-<li>WRITE access:<ul>
-<li>global WRITE access to create/modify/delete a listing in the draft or
-    pending state ONLY</li>
-<li>Org Stewards and above can change the state to published/approved or
-    rejected, and change state to enabled/disabled, but must respect
-    Organization (an Org Steward cannot modify
-    a listing for which they are not the owner and/or not a member of
-    the listing's agency)</li>
-<li>global WRITE access to create/modify/delete reviews (item_comment) for
-    any listing (must respect organization (if private) and access_control)</li>
-</ul>
-</li>
-<li>READ access to /self/listing to return listings that current user owns (?)</li>
-</ul>
-<p><strong>Permission Types</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">Permission Types</th>
-<th align="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">read</td>
-<td align="left">The Read permission refers to a user's capability to read the contents of the endpoint.</td>
-</tr>
-<tr>
-<td align="left">write</td>
-<td align="left">The Write permission refers to a user's capability to write contents to the endpoint.</td>
-</tr>
-<tr>
-<td align="left">access_control enforcement flag</td>
-<td align="left">access_control level cannot exceed that of the current user</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Access Control Matrix</strong>
-<table>
-    <tr>
-        <th>aml-center</th>
-        <th colspan="5">Access Control</th>
-    </tr></p>
-<pre><code>&lt;tr&gt;
-    &lt;th&gt;Endpoint&lt;/th&gt;
-    &lt;th&gt;Anonymous Users&lt;/th&gt;
-    &lt;th&gt;Self&lt;/th&gt;
-    &lt;th&gt;Other&lt;/th&gt;
-    &lt;th&gt;Org Steward&lt;/th&gt;
-    &lt;th&gt;Apps Mall Steward &lt;/th&gt;
-    &lt;th&gt;Notes&lt;/th&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-    &lt;td&gt;access_control (?)&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;r--&lt;/td&gt;
-    &lt;td&gt;&lt;/td&gt;
-    &lt;td&gt;r--&lt;/td&gt;
-    &lt;td&gt;rw-&lt;/td&gt;
-    &lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-    &lt;td&gt;agency&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;r--&lt;/td&gt;
-    &lt;td&gt;r--&lt;/td&gt;
-    &lt;td&gt;r--&lt;/td&gt;
-    &lt;td&gt;rw-&lt;/td&gt;
-    &lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-    &lt;td&gt;category&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;r--&lt;/td&gt;
-    &lt;td&gt;r--&lt;/td&gt;
-    &lt;td&gt;r--&lt;/td&gt;
-    &lt;td&gt;rw-&lt;/td&gt;
-    &lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-    &lt;td&gt;contact_type&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;r--&lt;/td&gt;
-    &lt;td&gt;r--&lt;/td&gt;
-    &lt;td&gt;r--&lt;/td&gt;
-    &lt;td&gt;rw-&lt;/td&gt;
-    &lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-    &lt;td&gt;image (metadata)&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;rwa&lt;/td&gt;
-    &lt;td&gt;rwa&lt;/td&gt;
-    &lt;td&gt;rwa&lt;/td&gt;
-    &lt;td&gt;rwa&lt;/td&gt;
-    &lt;td&gt;Read: access_control enforcement on the images themselves, Write: associated access_control level cannot exceed that of the current user&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-    &lt;td&gt;intent&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;rwa&lt;/td&gt;
-    &lt;td&gt;rwa&lt;/td&gt;
-    &lt;td&gt;rwa&lt;/td&gt;
-    &lt;td&gt;rwa&lt;/td&gt;
-    &lt;td&gt;associated intent.icon.access_control cannot exceed that of the current user&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-    &lt;td&gt;library&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;r--&lt;/td&gt;
-    &lt;td&gt;r--&lt;/td&gt;
-    &lt;td&gt;r--&lt;/td&gt;
-    &lt;td&gt;r--&lt;/td&gt;
-    &lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-    &lt;td&gt;library (self)&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;rw-&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-    &lt;td&gt;listing&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;r-a&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;rw-&lt;/td&gt;
-    &lt;td&gt;rw-&lt;/td&gt;
-    &lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-    &lt;td&gt;listing (self)&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;rw-&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-    &lt;td&gt;listing_type (?)&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;r--&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;r--&lt;/td&gt;
-    &lt;td&gt;rw-&lt;/td&gt;
-    &lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-    &lt;td&gt;notification&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;rw-&lt;/td&gt;
-    &lt;td&gt;r--&lt;/td&gt;
-    &lt;td&gt;rw-&lt;/td&gt;
-    &lt;td&gt;rw-&lt;/td&gt;
-    &lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-    &lt;td&gt;profile&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;rw-&lt;/td&gt;
-    &lt;td&gt;rw-&lt;/td&gt;
-    &lt;td&gt;users cannot create, modify, or delete users other than themselves&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-    &lt;td&gt;profile (self route)&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;rw-&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;Self&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-    &lt;td&gt;storefront&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;R--&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;Get Storefront for current user&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-    &lt;td&gt;metadata&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;R--&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;---&lt;/td&gt;
-    &lt;td&gt;Get metadata for current user&lt;/td&gt;
-&lt;/tr&gt;
-</code></pre>
-</table>
-
 <h2 id="sample-users-for-basicauth">Sample Users for BasicAuth</h2>
 <p>By default, HTTP Basic Authentication is used for login.  <br />
 This can be changed to PKI (client certificates) by changing <code>REST_FRAMEWORK.DEFAULT_AUTHENTICATION_CLASSES</code> in <code>settings.py</code></p>
@@ -626,7 +372,7 @@ This can be changed to PKI (client certificates) by changing <code>REST_FRAMEWOR
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="ascii-entities/" class="btn btn-neutral float-right" title="Ascii entities">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="access_control/" class="btn btn-neutral float-right" title="Access control">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
     </div>
@@ -654,7 +400,7 @@ This can be changed to PKI (client certificates) by changing <code>REST_FRAMEWOR
       
       
       
-        <span style="margin-left: 15px"><a href="ascii-entities/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="access_control/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
@@ -665,5 +411,5 @@ This can be changed to PKI (client certificates) by changing <code>REST_FRAMEWOR
 
 <!--
 MkDocs version : 0.16.3
-Build Date UTC : 2018-09-13 12:27:46
+Build Date UTC : 2018-09-13 20:00:04
 -->
