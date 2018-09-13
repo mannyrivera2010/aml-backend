@@ -197,8 +197,8 @@
 Travis-CI  <a href="https://travis-ci.org/aml-development/aml-backend"><img alt="Build Status" src="https://travis-ci.org/aml-development/aml-backend.svg?branch=master" /></a></p>
 <h2 id="getting-started">Getting Started</h2>
 <h3 id="software-versions">Software Versions</h3>
-<p><code>Elasticsearch</code> - 6.3.2
-<code>Python</code> - 3.4</p>
+<p><code>Elasticsearch</code> - 6.3.2  <br />
+<code>Python</code> - 3.4    </p>
 <h3 id="development-environment-preparation">Development environment preparation</h3>
 <pre><code>cd ~
 mkdir git
@@ -219,36 +219,36 @@ make dev
 
 <h3 id="makefile">MakeFile</h3>
 <p>There is a MakeFile in the project to run repetitive commands    </p>
-<p><em>Flags</em>
-<code>use_psql</code>-Use Postgres Database
-<code>use_es</code>-Use elasticsearch Database
-<code>use_gunicorn</code>-Use gunicorn
-<code>clean</code>-Clean Directory
-<code>create_static</code>-Collect static files
-<code>test</code>-Run all tests
-<code>test_parallel</code>-Run all test in parallel (increase speed of unit tests)
-<code>test_soft</code>-Run all tests (without clean)
-<code>install_git_hooks</code>-Install Git Hooks
-<code>run</code>-Run the server locally
-<code>run_all</code>-Run server locally, celery_worker, Recommendations
-<code>celery_worker</code>-Run the celery worker
-<code>run_gunicorn_secure</code>-Run server using gunicorn on HTTPS (preq: clone dev-tools repo)
-<code>run_gunicorn_secure_ansible</code>-Run server using gunicorn on HTTPS (preq: clone aml-ansible repo)
-<code>codecheck</code>-Run pycodestyle python linter on the code
-<code>autopep</code>-Run tool to fix python code
-<code>autopepdiff</code>-Print out linter diff
-<code>reindex_es</code>-Reindex the data into Elasticsearch
-<code>recommend</code>-Run Recommendations algorthims
-<code>db_migrate</code>-Db migrate
-<code>dev</code>-Set up development server with sample data
-<code>email</code>-Send Notifications using email server
-<code>run_debug_email_server</code>-Run Debug Email Server
-<code>shell</code>-Launch python shell using sqlite
-<code>shell_psql</code>-Launch python shell using postgres
-<code>create_virtualenv</code>-Create Python Environment
-<code>pyenv</code>-Create Python Environment and install dependencies
-<code>pyenv_wheel</code>-Create Python Environment and install dependencies using wheelhouse</p>
-<p><em>Requirements</em>
+<p><strong>Flags</strong>
+<code>use_psql</code>-Use Postgres Database  <br />
+<code>use_es</code>-Use elasticsearch Database  <br />
+<code>use_gunicorn</code>-Use gunicorn  <br />
+<code>clean</code>-Clean Directory  <br />
+<code>create_static</code>-Collect static files  <br />
+<code>test</code>-Run all tests  <br />
+<code>test_parallel</code>-Run all test in parallel (increase speed of unit tests)  <br />
+<code>test_soft</code>-Run all tests (without clean)  <br />
+<code>install_git_hooks</code>-Install Git Hooks  <br />
+<code>run</code>-Run the server locally  <br />
+<code>run_all</code>-Run server locally, celery_worker, Recommendations  <br />
+<code>celery_worker</code>-Run the celery worker  <br />
+<code>run_gunicorn_secure</code>-Run server using gunicorn on HTTPS (preq: clone dev-tools repo)  <br />
+<code>run_gunicorn_secure_ansible</code>-Run server using gunicorn on HTTPS (preq: clone aml-ansible repo)  <br />
+<code>codecheck</code>-Run pycodestyle python linter on the code  <br />
+<code>autopep</code>-Run tool to fix python code  <br />
+<code>autopepdiff</code>-Print out linter diff  <br />
+<code>reindex_es</code>-Reindex the data into Elasticsearch  <br />
+<code>recommend</code>-Run Recommendations algorthims  <br />
+<code>db_migrate</code>-Db migrate  <br />
+<code>dev</code>-Set up development server with sample data  <br />
+<code>email</code>-Send Notifications using email server  <br />
+<code>run_debug_email_server</code>-Run Debug Email Server  <br />
+<code>shell</code>-Launch python shell using sqlite  <br />
+<code>shell_psql</code>-Launch python shell using postgres  <br />
+<code>create_virtualenv</code>-Create Python Environment  <br />
+<code>pyenv</code>-Create Python Environment and install dependencies  <br />
+<code>pyenv_wheel</code>-Create Python Environment and install dependencies using wheelhouse    </p>
+<p><strong>Requirements</strong>
 <code>upgrade_requirements</code>-upgrade requirements
 <code>freeze_requirements</code>-freeze requirements</p>
 <h3 id="postgres-setup">Postgres Setup</h3>
@@ -411,5 +411,5 @@ This can be changed to PKI (client certificates) by changing <code>REST_FRAMEWOR
 
 <!--
 MkDocs version : 0.16.3
-Build Date UTC : 2018-09-13 20:00:04
+Build Date UTC : 2018-09-13 20:08:29
 -->
