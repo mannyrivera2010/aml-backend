@@ -64,21 +64,19 @@
         
             <li><a class="toctree-l3" href="#software-versions">Software Versions</a></li>
         
+            <li><a class="toctree-l3" href="#postgres-setup-optional">Postgres Setup (optional)</a></li>
+        
+            <li><a class="toctree-l3" href="#installing-and-running-elasticsearch">Installing and Running Elasticsearch</a></li>
+        
             <li><a class="toctree-l3" href="#development-environment-preparation">Development environment preparation</a></li>
         
             <li><a class="toctree-l3" href="#building-and-running-the-aml-backend">Building and running the AML backend</a></li>
         
             <li><a class="toctree-l3" href="#makefile">MakeFile</a></li>
         
-            <li><a class="toctree-l3" href="#postgres-setup">Postgres Setup</a></li>
-        
             <li><a class="toctree-l3" href="#local-development-method-minimal">Local development method (minimal)</a></li>
         
             <li><a class="toctree-l3" href="#aml-ansible-method">aml-ansible method</a></li>
-        
-            <li><a class="toctree-l3" href="#runing-elasticsearch-for-search">Runing Elasticsearch for Search</a></li>
-        
-            <li><a class="toctree-l3" href="#installing-and-running-elasticsearch">Installing and Running Elasticsearch</a></li>
         
         </ul>
     
@@ -199,27 +197,74 @@ Travis-CI  <a href="https://travis-ci.org/aml-development/aml-backend"><img alt=
 <h3 id="software-versions">Software Versions</h3>
 <p><code>Elasticsearch</code> - 6.3.2  <br />
 <code>Python</code> - 3.4    </p>
+<h3 id="postgres-setup-optional">Postgres Setup (optional)</h3>
+<p>Command to install postgresql (on Debian-based OS)    </p>
+<pre><code>sudo apt-get install postgresql postgresql-contrib
+</code></pre>
+
+<p>Commands to setup postgresql for aml-backend    </p>
+<pre><code>sudo -i -u postgres
+createuser aml_user
+psql -c 'ALTER USER aml_user CREATEDB;'
+psql -c &quot;ALTER USER &quot;aml_user&quot; WITH PASSWORD 'password';&quot;
+createdb aml
+psql -c 'GRANT ALL PRIVILEGES ON DATABASE aml TO aml_user;'
+</code></pre>
+
+<h3 id="installing-and-running-elasticsearch">Installing and Running Elasticsearch</h3>
+<p>aml-backend requires Elasticsearch 6.3.2 <br />
+<a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.3/_installation.html">Installation Guide for 6.3</a></p>
+<p><strong>Tip</strong>  <br />
+When installing Elasticsearch in production, you can choose to use the Debian or RPM packages provided on the downloads page.  <br />
+You can also use the officially supported Puppet module, Chef cookbook, or Ansible.    </p>
 <h3 id="development-environment-preparation">Development environment preparation</h3>
+<h4 id="cloning-repo">Cloning Repo</h4>
 <pre><code>cd ~
 mkdir git
 cd git
 git clone git@github.com:aml-development/aml-backend.git
-cd aml-backend
+</code></pre>
+
+<h4 id="creating-python-environment-and-installing-dependencies">Creating Python Environment and Installing dependencies</h4>
+<p><strong>Using Commands</strong>    </p>
+<pre><code>cd ~/git/aml-backend
 virtualenv env
 source env/bin/activate
 pip install -r requirements.txt
 </code></pre>
 
-<p>If <code>virtualenv env</code> does not work it might be <code>python3 -m venv env</code> if the environment</p>
-<h3 id="building-and-running-the-aml-backend">Building and running the AML backend</h3>
+<p>If <code>virtualenv env</code> does not work it might be <code>python3 -m venv env</code> if the environment    </p>
+<p><strong>Using MakeFile</strong>    </p>
 <pre><code>cd ~/git/aml-backend
-source env/bin/activate
-make dev
+make pyenv
 </code></pre>
 
+<h3 id="building-and-running-the-aml-backend">Building and running the AML backend</h3>
+<pre><code>cd ~/git/aml-backend
+# activate python environment
+source env/bin/activate
+# Creating Database, Collecting Static Files, Running Sample Data Generator
+make dev
+# Running Backend
+make run
+</code></pre>
+
+<p><strong>Using Elasticsearch</strong>    </p>
+<pre><code>cd ~/git/aml-backend
+# activate python environment
+source env/bin/activate
+# Creating Database, Collecting Static Files, Running Sample Data Generator, indexing elasticsearch
+make dev reindex_es
+# Running backend with elasticsearch
+make use_es run
+</code></pre>
+
+<p><strong>Running Elasticsearch for Search using settings file</strong>  <br />
+aml/Settings.py file variable needs to be updated to <code>ES_ENABLED = True</code>  <br />
+After installing Elasticsearch run <code>make reindex_es</code> and run <code>make use_es run</code> in the aml-backend folder while inside of your python environment    </p>
 <h3 id="makefile">MakeFile</h3>
 <p>There is a MakeFile in the project to run repetitive commands    </p>
-<p><strong>Flags</strong>
+<p><strong>Flags</strong>  <br />
 <code>use_psql</code>-Use Postgres Database  <br />
 <code>use_es</code>-Use elasticsearch Database  <br />
 <code>use_gunicorn</code>-Use gunicorn  <br />
@@ -248,23 +293,9 @@ make dev
 <code>create_virtualenv</code>-Create Python Environment  <br />
 <code>pyenv</code>-Create Python Environment and install dependencies  <br />
 <code>pyenv_wheel</code>-Create Python Environment and install dependencies using wheelhouse    </p>
-<p><strong>Requirements</strong>
-<code>upgrade_requirements</code>-upgrade requirements
-<code>freeze_requirements</code>-freeze requirements</p>
-<h3 id="postgres-setup">Postgres Setup</h3>
-<p>Command to install postgresql (on Debian-based OS)</p>
-<pre><code>sudo apt-get install postgresql postgresql-contrib
-</code></pre>
-
-<p>Commands to setup postgresql for aml-backend</p>
-<pre><code>sudo -i -u postgres
-createuser aml_user
-psql -c 'ALTER USER aml_user CREATEDB;'
-psql -c &quot;ALTER USER &quot;aml_user&quot; WITH PASSWORD 'password';&quot;
-createdb aml
-psql -c 'GRANT ALL PRIVILEGES ON DATABASE aml TO aml_user;'
-</code></pre>
-
+<p><strong>Requirements</strong>  <br />
+<code>upgrade_requirements</code>-upgrade requirements  <br />
+<code>freeze_requirements</code>-freeze requirements    </p>
 <h3 id="local-development-method-minimal">Local development method (minimal)</h3>
 <p>To serve the application on your host machine with minimal external dependencies,
 do the following:</p>
@@ -309,27 +340,6 @@ of this README, which will create a production-esque deployment of AML:</p>
 <li>Enable HTTPS (via nginx reverse proxy)</li>
 <li>Served via Gunicorn (vs. Django development server)</li>
 </ul>
-<h3 id="runing-elasticsearch-for-search">Runing Elasticsearch for Search</h3>
-<p>aml/Settings.py file variable needs to be updated to <code>ES_ENABLED = True</code>  <br />
-After installing Elasticsearch run <code>make reindex_es</code> and run <code>make run_es</code> in the aml-backend folder while inside of your $env     </p>
-<h3 id="installing-and-running-elasticsearch">Installing and Running Elasticsearch</h3>
-<p>aml-backend requires Elasticsearch 2.4.1  <br />
-<a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.4/_installation.html">Installation Guide for 2.4.1</a></p>
-<p>The requirement for installing Elasticsearch is Java 7.  <br />
-Preferably, you should install the latest version of the official Java from www.java.com.    </p>
-<p>You can get the Elasticsearch 2.4.1 from https://www.elastic.co/blog/elasticsearch-2-4-1-released.  <br />
-To install Elasticsearch, download and extract the archive file for your platform.  <br />
-Once you’ve extracted the archive file, Elasticsearch is ready to run.   </p>
-<p>Below are the commands:</p>
-<pre><code>wget https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.4.1/elasticsearch-2.4.1.tar.gz
-tar xvf elasticsearch-2.4.1.tar.gz
-cd elasticsearch-2.4.1
-./bin/elasticsearch
-</code></pre>
-
-<p><strong>Tip</strong>  <br />
-When installing Elasticsearch in production, you can choose to use the Debian or RPM packages provided on the downloads page.  <br />
-You can also use the officially supported Puppet module, Chef cookbook, or Ansible.    </p>
 <h2 id="releasing">Releasing</h2>
 <p>Run <code>python release.py</code> to generate a tarball with Wheels for the application
 and all of its dependencies. See <code>release.py</code> for details</p>
@@ -411,5 +421,5 @@ This can be changed to PKI (client certificates) by changing <code>REST_FRAMEWOR
 
 <!--
 MkDocs version : 0.16.3
-Build Date UTC : 2018-09-13 20:08:29
+Build Date UTC : 2018-09-14 18:01:35
 -->
