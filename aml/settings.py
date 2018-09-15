@@ -334,6 +334,7 @@ EMAIL_PORT = 1025
 EMAIL_FROM_FIELD = 'admin@app.com'
 EMAIL_SUBJECT_FIELD_TEMPLATE = '{{ non_emailed_count }} New Notifications'
 EMAIL_BODY_FIELD_TEMPLATE = '''Welcome to App Site
+DAYS_UNTIL_UPDATE=60
 
 You have {{ non_emailed_count }} new notifications
 
