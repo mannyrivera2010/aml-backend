@@ -16,7 +16,6 @@ Group Target
     APP_STEWARD = 'app_steward'
     ORG_STEWARD = 'org_steward'
     USER = 'user'
-
 =====Notification Type=====
 
                 +--> SystemWide
@@ -445,6 +444,35 @@ class ListingNotification(NotificationBase):
         owner_id_list = get_owners_for_bookmark_3_2(self.entity_dict['listing'])
         profile_list = Profile.objects.filter(id__in=owner_id_list, listing_notification_flag=True).all()
         return profile_list
+
+    def check_local_permission(self, entity):
+        if self.sender_profile.highest_role() in ['APPS_MALL_STEWARD', 'ORG_STEWARD']:
+            return True
+
+        if self.sender_profile not in self.entity_dict['listing'].owners.all():
+            raise errors.PermissionDenied('Cannot create a notification for a listing you do not own')
+        else:
+            return True
+        return False
+
+
+class ListingUpdateNotification(NotificationBase):
+
+    def modify_notification_before_save(self, notification_object):
+        notification_object.listing = self.entity_dict['listing']
+
+    def get_entity_id(self):
+        return self.entity_dict['listing'].id
+
+    def get_notification_db_type(self):
+        return Notification.LISTING
+
+    def get_notification_db_subtype(self):
+        return Notification.LISTING_PRIVATE_STATUS
+
+    def get_target_list(self):
+        owner_id_list = get_owners_for_bookmark_3_2(self.entity_dict['listing'])
+        return Profile.objects.filter(id__in=owner_id_list, listing_notification_flag=True).all()
 
     def check_local_permission(self, entity):
         if self.sender_profile.highest_role() in ['APPS_MALL_STEWARD', 'ORG_STEWARD']:
