@@ -120,11 +120,11 @@ def run():
 
     # tar everything up
     if args.version:
-        call("tar -czf {0!s}-{1!s}.tar.gz release".format('backend', version),
+        call("tar -czf {0!s}-{1!s}.tar.gz release".format('aml-backend', version),
              shell=True)
     else:
         date = get_date_time()
-        call("tar -czf {0!s}-{1!s}.tar.gz release".format('backend', date),
+        call("tar -czf {0!s}-{1!s}.tar.gz release".format('aml-backend', date),
              shell=True)
 
     # cleanup build dirs
