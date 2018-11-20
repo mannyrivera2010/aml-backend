@@ -82,3 +82,16 @@ class ImageApiTest(APITestCase):
         url = '/api/image/2/'
         response = APITestHelper.request(self, url, 'DELETE', username='pmurt', status_code=403)
         self.assertEqual(response.data, ExceptionUnitTestHelper.permission_denied('Security marking too high for current user'))
+
+    def test_post_profile_avatar_image(self):
+        url = '/api/image/'
+        data = {
+            'security_marking': 'UNCLASSIFIED',
+            'image_type': 'profile_avatar',
+            'file_extension': 'png',
+            'image': open('amlcenter/scripts/test_images/android.png', mode='rb')
+        }
+        response = APITestHelper.request(self, url, 'POST', data=data, username='wsmith', status_code=201, format_str='multipart')
+
+        self.assertTrue('id' in response.data)
+        self.assertTrue('security_marking' in response.data)
