@@ -98,6 +98,7 @@ class ImageType(models.Model):
     LARGE_BANNER_ICON = 'large_banner_icon'
     SMALL_SCREENSHOT = 'small_screenshot'
     LARGE_SCREENSHOT = 'large_screenshot'
+    PROFILE_AVATAR = 'profile_avatar'
     NAME_CHOICES = (
         (SMALL_ICON, 'small_icon'),
         (LARGE_ICON, 'large_icon'),
@@ -105,6 +106,7 @@ class ImageType(models.Model):
         (LARGE_BANNER_ICON, 'large_banner_icon'),
         (SMALL_SCREENSHOT, 'small_screenshot'),
         (LARGE_SCREENSHOT, 'large_screenshot'),
+        (PROFILE_AVATAR, 'profile_avatar'),
     )
 
     name = models.CharField(max_length=64, choices=NAME_CHOICES, unique=True)
